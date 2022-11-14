@@ -4,21 +4,22 @@
 
   if($_SERVER["REQUEST_METHOD"] == "POST"){
     $username = $_POST['username'];
-    $password = MD5($_POST['password']);
+    $password = $_POST['password'];
   }
   
-  $sql = "SELECT * FROM user WHERE username='$username' and password='$password' ";
+  $sql = "SELECT * FROM user WHERE username='$username'";
   $result = $conn->query($sql);
   $pw_check = $usr_check = "";
   if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
         $usr_check = $row["username"];
         $pw_check = $row["password"];
-        if($row["username"]==$username)
+        $_SESSION['pwddd'] = $pw_check;
+        if($row["username"]==$username && password_verify($password,$pw_check)){
           $_SESSION['username'] = $username;
-        if($row["password"]==$password)
           $_SESSION['password'] = $password;
-        $role = $row['role'];
+          $role = $row['role'];
+        }
     }
   }
     if($role == 'admin'){
@@ -32,10 +33,10 @@
       setcookie("username", $username, time() + (86400 * 30), "/");
     }else{
       if($usr_check != $username){
-        $_SESSION['username']=-1;
+        $_SESSION['usrErr']="Username incorrect";
       }
       if($pw_check != $password){
-        $_SESSION['password']=-1;
+        $_SESSION['pwErr']="Password incorrect";
       }
       // header("Location:../signin.php");
     }

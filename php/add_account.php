@@ -13,7 +13,7 @@
             $_SESSION["usrErr"] = "";
         }
         if (!empty($_POST["password"])) {
-            $password = MD5($_POST["password"]);
+            $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
             $_SESSION["pwErr"] = "";
         }
         if (!empty($_POST["email"])) {
@@ -38,10 +38,16 @@
     if($usrErr == "" && $emailErr == ""){
         $stmt = $conn->prepare("INSERT INTO `user` (`username`, `password`, `role`, `email`) VALUES (?, ?, ?, ?)");
         $stmt->bind_param("ssss",$username,$password,$role,$email);
-        $stmt->execute();
-        $stmt->close();
+        if($stmt->execute()){
+            $_SESSION['regisMsg'] = "Register success";
+            $stmt->close();
+        }
+        else{
+            $_SESSION['regisMsg'] = "Register failed";
+            header("Location:../register.php");
+        }
     }else{
-
+        $_SESSION['regisMsg'] = "Register failed";
         header("Location:../register.php");
     }
     

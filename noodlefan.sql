@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 13, 2022 at 08:41 AM
+-- Generation Time: Nov 14, 2022 at 01:37 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -32,7 +32,8 @@ CREATE TABLE `images` (
   `username` varchar(30) NOT NULL,
   `file_name` varchar(255) NOT NULL,
   `uploaded_on` datetime NOT NULL,
-  `status` enum('1','0') NOT NULL DEFAULT '1'
+  `status` enum('1','0') NOT NULL DEFAULT '1',
+  `role_access` enum('user','admin') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -53,9 +54,10 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`username`, `password`, `role`, `email`) VALUES
-('admin', '21232f297a57a5a743894a0e4a801fc3', 'admin', 'admin@gmail.com'),
-('demo', 'fe01ce2a7fbac8fafaed7c982a04e229', 'user', 'demo@gmail.com'),
-('seazabuky', '8f4bd6b8a68138f2449f311f4c5fc9a6', 'admin', 'seazabuky@gmail.com');
+('admin', '$2y$10$I22FIZEPXaJDxilRuu/ysu12pb2MTyqaSQt0bmMH0v1W2hAyb3bPC', 'admin', 'admin@gmail.com'),
+('demo', '$2y$10$bVZFqOatmKNlFTk2FpNZhO4ZgbypE0zJXxK8RcE8Z3JSzzc19n0r2', 'user', 'demo@gmail.com'),
+('seazabuky1', '$2y$10$Te/MM2H8yl1G1DzIjTZ4hOKRJPDQZFhX8yJwX6UsnigUdqJeGfs72', 'admin', 'seazabuky@gmail.com'),
+('user', '$2y$10$qGoT.qKhvrtmUC7ozOkv5efYYWk6JdHexTkR1JKriLt4rD0DwsJau', 'user', 'user@gmail.com');
 
 --
 -- Indexes for dumped tables

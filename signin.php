@@ -27,9 +27,6 @@
         if(@$_SESSION["role"] == 'admin' || @$_SESSION["role"] == 'user'){
             header("Location:./index.php");
         }
-        $accountErr = "";
-            if (@$_SESSION["password"]==-1 || @$_SESSION["username"]==-1) 
-                $accountErr = "Username or Password incorrect";
             
     ?>
 	<div class="fixed top-0 left-0 end">
@@ -45,8 +42,16 @@
                     <h1 class="text-2xl font-bold leading-tight tracking-tight text-blue-600 md:text-2xl dark:text-white">
                         Sign in to your account
                     </h1>
+                    <?php if(!empty(@$_SESSION["regisMsg"])&& @$_SESSION["regisMsg"]=="Register success") {?>
+                        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+                            <strong class="font-bold">Success!</strong>
+                            <span class="block sm:inline"><?php echo @$_SESSION["regisMsg"]; ?></span>
+                            <span class="absolute top-0 bottom-0 right-0 px-4 py-3"></span>
+                        </div>
+                    <?php unset($_SESSION["regisMsg"]); } ?>
                     <form class="space-y-4 md:space-y-6" action="./php/checkLogin.php" method="POST">
                         <label for="user-icon" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Your username</label>
+                        <span class="text-red-600"><?php echo @$_SESSION['usrErr']; unset($_SESSION['usrErr']); ?></span>
                         <div class="relative">
                             <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-500 dark:text-gray-400">
@@ -57,6 +62,7 @@
                         </div>
 
                         <label for="key-icon" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Password</label>
+                        <span class="text-red-600"><?php echo @$_SESSION['pwErr']; unset($_SESSION['pwErr']); ?></span>
                         <div class="relative">
                             <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-500 dark:text-gray-400">
@@ -65,7 +71,6 @@
                             </div>
                             <input type="password" name="password" id="key-icon" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="••••••••" required="">
                         </div>
-                        <span class="text-red-600"><?php echo $accountErr;?></span>
                         <button type="submit" class="w-full text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 ">Sign in</button>
                         <p class="text-sm font-light text-gray-500 dark:text-gray-400">
                             Don’t have an account yet? <a href="./register.php" class="font-medium text-blue-600 hover:underline dark:text-blue-500">Sign up</a>

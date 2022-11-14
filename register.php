@@ -39,11 +39,19 @@
             <div class="bg-white rounded-lg shadow w-auto dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                 <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
                     <h1 class="text-2xl font-bold leading-tight tracking-tight text-blue-600 md:text-2xl dark:text-white">
-                        Sign in to your account
+                        Create your account
                     </h1>
+                    <?php if(!empty(@$_SESSION["regisMsg"])&& @$_SESSION["regisMsg"]=="Register failed") {?>
+                        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                            <strong class="font-bold">Failed!</strong>
+                            <span class="block sm:inline"><?php echo @$_SESSION["regisMsg"]; ?></span>
+                            <span class="absolute top-0 bottom-0 right-0 px-4 py-3"></span>
+                        </div>
+                        
+                    <?php unset($_SESSION["regisMsg"]); } ?>
                     <form class="space-y-4 md:space-y-6" action="./php/add_account.php" method="POST">
                         <label for="user-icon" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Your username</label>
-                        <span class="text-red-600"><?php echo @$_SESSION['usrErr']; ?></span>
+                        <span class="text-red-600"><?php echo @$_SESSION['usrErr']; unset($_SESSION['usrErr']); ?></span>
                         <div class="relative">
                             <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-500 dark:text-gray-400">
@@ -54,7 +62,7 @@
                         </div>
 
                         <label for="key-icon" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Password</label>
-                        <span class="text-red-600"><?php echo @$_SESSION['pwErr']; ?></span>
+                        <span class="text-red-600"><?php echo @$_SESSION['pwErr']; unset($_SESSION['pwErr']); ?></span>
                         <div class="relative">
                             <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-500 dark:text-gray-400">
@@ -64,7 +72,7 @@
                             <input type="password" name="password" id="key-icon" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="••••••••" required="">
                         </div>
                         <label for="key-icon" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Email</label>
-                        <span class="text-red-600"><?php echo @$_SESSION['emailErr']; ?></span>
+                        <span class="text-red-600"><?php echo @$_SESSION['emailErr']; unset($_SESSION['emailErr']); ?></span>
                         <div class="relative">
                             <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-500 dark:text-gray-400">
