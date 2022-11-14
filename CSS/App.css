@@ -29,3 +29,29 @@
   height: 100%;
   object-fit: cover;
 }
+
+.gradient-text {
+  background: linear-gradient(-45deg, #D16BA5, #86A8E7, #5FFBF1);
+	background-size: 300%;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: 900;
+	font-size: 100px;
+	letter-spacing: -5px;
+	text-transform: uppercase;
+	background-clip: text;
+  -webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	animation: animated_text 5s ease-in-out infinite;
+	-moz-animation: animated_text 5s ease-in-out infinite;
+	-webkit-animation: animated_text 5s ease-in-out infinite;
+}
+@keyframes animated_text {
+	0% { background-position: 0px 50%; }
+	50% { background-position: 100% 50%; }
+	100% { background-position: 0px 50%; }
+}
+
+
+#card-grid:hover > #warp:not(:hover) #img {
+  filter: brightness(0.5) saturate(0.5) contrast(1.2) blur(20px);
+}

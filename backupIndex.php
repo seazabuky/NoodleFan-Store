@@ -69,26 +69,11 @@
 			filter: brightness(0.5) saturate(0.5) contrast(1.2) blur(20px);
 		}
 	</style>
-	<style>
-		.swiper-button-prev,
-		.swiper-button-next {
-			--swiper-theme-color: #ffffff;
-			--swiper-navigation-size: 1.5rem;
-			--swiper-navigation-offset: 0.5rem;
-			--swiper-navigation-opacity: 0.25;
-			padding-left: 1em;
-			padding-right: 1em;
-		}
-
-		#rs3content {
-			background-image: url('https://dji-official-fe.djicdn.com/cms/uploads/d41bdcbde3489b373c77b4137a9281d5@origin.jpg');
-		}
-	</style>
 </head>
 
 <body class="bg-white dark:bg-gray-900">
 	<?php
-	include("./php/server.php");
+	session_start();
 	$btn_login = '<a href="signin.php" >Sign in</a>';
 	if (@$_SESSION["role"] == 'admin' || @$_SESSION["role"] == 'user') {
 		$btn_login = '<a href="./php/logout.php" >Sign out</a>';
@@ -115,16 +100,16 @@
 				<div class="hidden justify-between items-center w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
 					<ul class="flex flex-col p-4 mt-4 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:bg-blue-100 lg:bg-transparent">
 						<li>
-							<a href="#" class="block py-2 pr-4 pl-3 text-white rounded hover:bg-gray-100 md:hover:bg-blue-500 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">Product</a>
+							<a href="#" class="block py-2 pr-4 pl-3 text-white rounded md:hover:bg-blue-500 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">Product</a>
 						</li>
 						<li>
-							<a href="#" class="block py-2 pr-4 pl-3 text-white rounded hover:bg-gray-100 md:hover:bg-gray-50 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">About</a>
+							<a href="#" class="block py-2 pr-4 pl-3 text-white rounded md:hover:bg-gray-50 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">About</a>
 						</li>
 						<li>
-							<a href="./php/upload.php" class="block py-2 pr-4 pl-3 text-white rounded hover:bg-gray-100 md:hover:bg-gray-50 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">Upload Image</a>
+							<a href="./php/upload.php" class="block py-2 pr-4 pl-3 text-white rounded md:hover:bg-gray-50 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">Upload Image</a>
 						</li>
 						<li>
-							<a href="#" class="block py-2 pr-4 pl-3 text-white rounded hover:bg-gray-100 md:hover:bg-gray-50 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">Contact</a>
+							<a href="#" class="block py-2 pr-4 pl-3 text-white rounded md:hover:bg-gray-50 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">Contact</a>
 						</li>
 					</ul>
 				</div>
@@ -138,7 +123,7 @@
 				<img src="res/_SAL9154.JPG" alt="avatar" />
 				<figcaption class="absolute bottom-6 px-4 text-lg text-white">
 					<p>DJI Avatar</p>
-					</figcatpion>
+				</figcatpion>
 			</div>
 			<div class="swiper-slide">
 				<img src="res/LUA_9514.JPG" alt="mavic 3 pro" />
@@ -147,7 +132,7 @@
 				<img src="res/_SAL7726.JPG" alt="t40" />
 			</div>
 			<div class="swiper-slide" id="rs3content">
-				<img src="res/LUA_9832.JPG" alt="rs3" />
+				<img src="https://dji-official-fe.djicdn.com/cms/uploads/d41bdcbde3489b373c77b4137a9281d5@origin.jpg" alt="rs3" />
 
 			</div>
 		</div>
@@ -166,19 +151,31 @@
 		</h2>
 		<div class="container lg:px-32 px-4 py-8 mx-auto items-center">
 			<div class="grid grid-cols-4 grid-rows-4 grid-flow-col gap-2" id="card-grid">
-				<?php
-				$query = $conn->query("SELECT * FROM images ORDER BY uploaded_on DESC");
-				if ($query->num_rows > 0) {
-					while ($row = $query->fetch_assoc()) {
-						$imageURL = './upload/' . $row["file_name"];
-						$name = $row["file_name"];
-				?>
-						<div class="w-full row-span-2" id="warp">
-							<img src=<?php echo $imageURL ?> class="inset-0 h-full w-full shadow-lg object-cover object-center rounded imgHover hover:scale-110 duration-300" id="img" />
-						</div>
-				<?php
-					}
-				} ?>
+				<div class="w-full row-span-2" id="warp">
+					<img src="/res/IMGHost/LUA-24.JPG" class="inset-0 h-full w-full shadow-lg object-cover object-center rounded imgHover hover:scale-110 duration-300" id="img" />
+				</div>
+				<div class="w-full col-span-2 row-span-2" id="warp">
+					<img src="/res/IMGHost/_LUA0354.JPG" class="inset-0 h-full w-full shadow-lg object-cover object-center rounded imgHover hover:scale-110 duration-300" id="img" />
+				</div>
+				<div class="w-full" id="warp">
+					<img src="/res/IMGHost/LUA_9917.JPG" class="inset-0 h-full w-full shadow-lg object-cover object-center rounded imgHover hover:scale-125 duration-300" id="img" />
+				</div>
+				<div class="w-full" id="warp">
+					<img src="/res/IMGHost/_LUA0874.JPG" class="inset-0 h-full w-full shadow-lg object-cover object-center rounded imgHover hover:scale-125 duration-300" id="img" />
+				</div>
+				<div class="w-full col-span-2 row-span-2" id="warp">
+					<img src="/res/IMGHost/000040.JPG" class="inset-0 h-full w-full shadow-lg object-cover object-center rounded imgHover hover:scale-110 duration-300" id="img" />
+				</div>
+
+				<div class="w-full col-span-2" id="warp">
+					<img src="/res/IMGHost/IMG_3016.JPG" class="inset-0 h-full w-full shadow-lg object-cover object-center rounded imgHover hover:scale-125 duration-300" id="img" />
+				</div>
+				<div class="w-full" id="warp">
+					<img src="/res/IMGHost/IMG_7244.JPG" class="inset-0 h-full w-full shadow-lg object-cover object-center rounded imgHover hover:scale-125 duration-300" id="img" />
+				</div>
+				<div class="w-full" id="warp">
+					<img src="res/IMGHost/IMG_2338.JPG" class="inset-0 h-full w-full shadow-lg object-cover object-center rounded imgHover hover:scale-125 duration-300" id="img" />
+				</div>
 			</div>
 		</div>
 	</section>
