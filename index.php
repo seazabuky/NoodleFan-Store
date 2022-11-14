@@ -128,87 +128,56 @@
 	</div>
 
 
-	<!-- sample content -->
-	<section class="gallery">
-		<div class="container">
-			<div class="grid">
-				<div class="column-xs-12 column-md-4">
-					<figure class="img-container">
-						<img src="https://source.unsplash.com/8b1cWDyvT7Y" />
-						<figcaption class="img-content">
-							<h2 class="title">Smart Watch</h2>
-							<h3 class="category">Showcase</h3>
-						</figcaption>
-						<span class="img-content-hover">
-							<h2 class="title">Smart Watch</h2>
-							<h3 class="category">Showcase</h3>
-						</span>
-					</figure>
+	<!-- Main content -->
+	<section class="overflow-hidden text-gray-700 mb-60">
+		<h1 class="text-center font-extrabold mt-20 text-7xl dark:text-gray-900 gradient-text">
+			LUNAR ARTEMIS
+		</h1>
+		<h2 class="text-center font-bold mt-3 text-2xl dark:text-gray-900">
+			PHOTOGRAPHY
+		</h2>
+		<div class="container lg:px-32 px-4 py-8 mx-auto items-center">
+			<div class="grid grid-cols-4 grid-rows-4 grid-flow-col gap-2" id="card-grid">
+				<div class="w-full row-span-2" id="warp">
+					<img src="/res/IMGHost/LUA-24.JPG"
+						class="inset-0 h-full w-full shadow-lg object-cover object-center rounded imgHover hover:scale-110 duration-300"
+						id="img" />
 				</div>
-				<div class="column-xs-12 column-md-4">
-					<figure class="img-container">
-						<img src="https://source.unsplash.com/5VXH4RG88gc" />
-						<figcaption class="img-content">
-							<h2 class="title">Camera Film</h2>
-							<h3 class="category">Showcase</h3>
-						</figcaption>
-						<span class="img-content-hover">
-							<h2 class="title">Camera Film</h2>
-							<h3 class="category">Showcase</h3>
-						</span>
-					</figure>
+				<div class="w-full col-span-2 row-span-2" id="warp">
+					<img src="/res/IMGHost/_LUA0354.JPG"
+						class="inset-0 h-full w-full shadow-lg object-cover object-center rounded imgHover hover:scale-110 duration-300"
+						id="img" />
 				</div>
-				<div class="column-xs-12 column-md-4">
-					<figure class="img-container">
-						<img src="https://source.unsplash.com/XtUd5SiX464">
-						<figcaption class="img-content">
-							<h2 class="title">Coffee</h2>
-							<h3 class="category">Showcase</h3>
-						</figcaption>
-						<span class="img-content-hover">
-							<h2 class="title">Coffee</h2>
-							<h3 class="category">Showcase</h3>
-						</span>
-					</figure>
+				<div class="w-full" id="warp">
+					<img src="/res/IMGHost/LUA_9917.JPG"
+						class="inset-0 h-full w-full shadow-lg object-cover object-center rounded imgHover hover:scale-125 duration-300"
+						id="img" />
 				</div>
-				<div class="column-xs-12 column-md-6">
-					<figure class="img-container">
-						<img src="https://source.unsplash.com/JYGnB9gTCls" />
-						<figcaption class="img-content">
-							<h2 class="title">Phone</h2>
-							<h3 class="category">Showcase</h3>
-						</figcaption>
-						<span class="img-content-hover">
-							<h2 class="title">Phone</h2>
-							<h3 class="category">Showcase</h3>
-						</span>
-					</figure>
+				<div class="w-full" id="warp">
+					<img src="/res/IMGHost/_LUA0874.JPG"
+						class="inset-0 h-full w-full shadow-lg object-cover object-center rounded imgHover hover:scale-125 duration-300"
+						id="img" />
 				</div>
-				<div class="column-xs-12 column-md-6">
-					<figure class="img-container">
-						<img src="https://source.unsplash.com/-RBuQ2PK_L8" />
-						<figcaption class="img-content">
-							<h2 class="title">Keyboard</h2>
-							<h3 class="category">Showcase</h3>
-						</figcaption>
-						<span class="img-content-hover">
-							<h2 class="title">Keyboard</h2>
-							<h3 class="category">Showcase</h3>
-						</span>
-					</figure>
+				<div class="w-full col-span-2 row-span-2" id="warp">
+					<img src="/res/IMGHost/000040.JPG"
+						class="inset-0 h-full w-full shadow-lg object-cover object-center rounded imgHover hover:scale-110 duration-300"
+						id="img" />
 				</div>
-				<div class="column-xs-12">
-					<figure class="img-container">
-						<img src="https://source.unsplash.com/P44RIGl9V54" />
-						<figcaption class="img-content">
-							<h2 class="title">Wrist Watch</h2>
-							<h3 class="category">Showcase</h3>
-						</figcaption>
-						<span class="img-content-hover">
-							<h2 class="title">Wrist Watch</h2>
-							<h3 class="category">Showcase</h3>
-						</span>
-					</figure>
+
+				<div class="w-full col-span-2" id="warp">
+					<img src="/res/IMGHost/IMG_3016.JPG"
+						class="inset-0 h-full w-full shadow-lg object-cover object-center rounded imgHover hover:scale-125 duration-300"
+						id="img" />
+				</div>
+				<div class="w-full" id="warp">
+					<img src="/res/IMGHost/IMG_7244.JPG"
+						class="inset-0 h-full w-full shadow-lg object-cover object-center rounded imgHover hover:scale-125 duration-300"
+						id="img" />
+				</div>
+				<div class="w-full" id="warp">
+					<img src="res/IMGHost/IMG_2338.JPG"
+						class="inset-0 h-full w-full shadow-lg object-cover object-center rounded imgHover hover:scale-125 duration-300"
+						id="img" />
 				</div>
 			</div>
 		</div>
