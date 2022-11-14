@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
-
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -88,7 +87,7 @@
 
 <body class="bg-white dark:bg-gray-900">
 	<?php
-	session_start();
+	include("./php/server.php");
 	$btn_login = '<a href="signin.php" >Sign in</a>';
 	if (@$_SESSION["role"] == 'admin' || @$_SESSION["role"] == 'user') {
 		$btn_login = '<a href="./php/logout.php" >Sign out</a>';
@@ -115,16 +114,16 @@
 				<div class="hidden justify-between items-center w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
 					<ul class="flex flex-col p-4 mt-4 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:bg-blue-100 lg:bg-transparent">
 						<li>
-							<a href="#" class="block py-2 pr-4 pl-3 text-white rounded hover:bg-gray-100 md:hover:bg-blue-500 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">Product</a>
+							<a href="#" class="block py-2 pr-4 pl-3 text-white rounded md:hover:bg-blue-500 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">Product</a>
 						</li>
 						<li>
-							<a href="#" class="block py-2 pr-4 pl-3 text-white rounded hover:bg-gray-100 md:hover:bg-gray-50 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">About</a>
+							<a href="#" class="block py-2 pr-4 pl-3 text-white rounded md:hover:bg-gray-50 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">About</a>
 						</li>
 						<li>
-							<a href="./php/upload.php" class="block py-2 pr-4 pl-3 text-white rounded hover:bg-gray-100 md:hover:bg-gray-50 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">Upload Image</a>
+							<a href="./php/upload.php" class="block py-2 pr-4 pl-3 text-white rounded md:hover:bg-gray-50 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">Upload Image</a>
 						</li>
 						<li>
-							<a href="#" class="block py-2 pr-4 pl-3 text-white rounded hover:bg-gray-100 md:hover:bg-gray-50 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">Contact</a>
+							<a href="#" class="block py-2 pr-4 pl-3 text-white rounded md:hover:bg-gray-50 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">Contact</a>
 						</li>
 					</ul>
 				</div>
@@ -157,7 +156,7 @@
 
 
 	<!-- Main content -->
-	<section class="overflow-hidden text-gray-700 mb-60">
+	<section class="overflow-hidden text-gray-700 mb-60 pt-10">
 		<h1 class="text-center font-extrabold mt-20 text-7xl dark:text-gray-900 gradient-text">
 			LUNAR ARTEMIS
 		</h1>
@@ -166,51 +165,22 @@
 		</h2>
 		<div class="container lg:px-32 px-4 py-8 mx-auto items-center">
 			<div class="grid grid-cols-4 grid-rows-4 grid-flow-col gap-2" id="card-grid">
-				<div class="w-full row-span-2" id="warp">
-					<img src="/res/IMGHost/LUA-24.JPG"
-						class="inset-0 h-full w-full shadow-lg object-cover object-center rounded imgHover hover:scale-110 duration-300"
-						id="img" />
-				</div>
-				<div class="w-full col-span-2 row-span-2" id="warp">
-					<img src="/res/IMGHost/_LUA0354.JPG"
-						class="inset-0 h-full w-full shadow-lg object-cover object-center rounded imgHover hover:scale-110 duration-300"
-						id="img" />
-				</div>
-				<div class="w-full" id="warp">
-					<img src="/res/IMGHost/LUA_9917.JPG"
-						class="inset-0 h-full w-full shadow-lg object-cover object-center rounded imgHover hover:scale-125 duration-300"
-						id="img" />
-				</div>
-				<div class="w-full" id="warp">
-					<img src="/res/IMGHost/_LUA0874.JPG"
-						class="inset-0 h-full w-full shadow-lg object-cover object-center rounded imgHover hover:scale-125 duration-300"
-						id="img" />
-				</div>
-				<div class="w-full col-span-2 row-span-2" id="warp">
-					<img src="/res/IMGHost/000040.JPG"
-						class="inset-0 h-full w-full shadow-lg object-cover object-center rounded imgHover hover:scale-110 duration-300"
-						id="img" />
-				</div>
-
-				<div class="w-full col-span-2" id="warp">
-					<img src="/res/IMGHost/IMG_3016.JPG"
-						class="inset-0 h-full w-full shadow-lg object-cover object-center rounded imgHover hover:scale-125 duration-300"
-						id="img" />
-				</div>
-				<div class="w-full" id="warp">
-					<img src="/res/IMGHost/IMG_7244.JPG"
-						class="inset-0 h-full w-full shadow-lg object-cover object-center rounded imgHover hover:scale-125 duration-300"
-						id="img" />
-				</div>
-				<div class="w-full" id="warp">
-					<img src="res/IMGHost/IMG_2338.JPG"
-						class="inset-0 h-full w-full shadow-lg object-cover object-center rounded imgHover hover:scale-125 duration-300"
-						id="img" />
-				</div>
+				<?php
+				$query = $conn->query("SELECT * FROM images ORDER BY uploaded_on DESC");
+				if ($query->num_rows > 0) {
+					while ($row = $query->fetch_assoc()) {
+						$imageURL = './upload/' . $row["file_name"];
+						$name = $row["file_name"];
+				?>
+						<div class="w-full row-span-2" id="warp">
+							<img src=<?php echo $imageURL ?> class="inset-0 h-full w-full shadow-lg object-cover object-center rounded imgHover hover:scale-115 duration-300" id="img" />
+						</div>
+				<?php
+					}
+				} ?>
 			</div>
 		</div>
 	</section>
-
 	<!-- dark mode script -->
 	<script>
 		var themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
