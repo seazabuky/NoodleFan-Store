@@ -88,7 +88,7 @@
 
 <body class="bg-white dark:bg-gray-900">
 	<?php
-	include("./php/server.php");
+	session_start();
 	$btn_login = '<a href="signin.php" >Sign in</a>';
 	if (@$_SESSION["role"] == 'admin' || @$_SESSION["role"] == 'user') {
 		$btn_login = '<a href="./php/logout.php" >Sign out</a>';
@@ -166,19 +166,47 @@
 		</h2>
 		<div class="container lg:px-32 px-4 py-8 mx-auto items-center">
 			<div class="grid grid-cols-4 grid-rows-4 grid-flow-col gap-2" id="card-grid">
-				<?php
-				$query = $conn->query("SELECT * FROM images ORDER BY uploaded_on DESC");
-				if ($query->num_rows > 0) {
-					while ($row = $query->fetch_assoc()) {
-						$imageURL = './upload/' . $row["file_name"];
-						$name = $row["file_name"];
-				?>
-						<div class="w-full row-span-2" id="warp">
-							<img src=<?php echo $imageURL ?> class="inset-0 h-full w-full shadow-lg object-cover object-center rounded imgHover hover:scale-110 duration-300" id="img" />
-						</div>
-				<?php
-					}
-				} ?>
+				<div class="w-full row-span-2" id="warp">
+					<img src="/res/IMGHost/LUA-24.JPG"
+						class="inset-0 h-full w-full shadow-lg object-cover object-center rounded imgHover hover:scale-110 duration-300"
+						id="img" />
+				</div>
+				<div class="w-full col-span-2 row-span-2" id="warp">
+					<img src="/res/IMGHost/_LUA0354.JPG"
+						class="inset-0 h-full w-full shadow-lg object-cover object-center rounded imgHover hover:scale-110 duration-300"
+						id="img" />
+				</div>
+				<div class="w-full" id="warp">
+					<img src="/res/IMGHost/LUA_9917.JPG"
+						class="inset-0 h-full w-full shadow-lg object-cover object-center rounded imgHover hover:scale-125 duration-300"
+						id="img" />
+				</div>
+				<div class="w-full" id="warp">
+					<img src="/res/IMGHost/_LUA0874.JPG"
+						class="inset-0 h-full w-full shadow-lg object-cover object-center rounded imgHover hover:scale-125 duration-300"
+						id="img" />
+				</div>
+				<div class="w-full col-span-2 row-span-2" id="warp">
+					<img src="/res/IMGHost/000040.JPG"
+						class="inset-0 h-full w-full shadow-lg object-cover object-center rounded imgHover hover:scale-110 duration-300"
+						id="img" />
+				</div>
+
+				<div class="w-full col-span-2" id="warp">
+					<img src="/res/IMGHost/IMG_3016.JPG"
+						class="inset-0 h-full w-full shadow-lg object-cover object-center rounded imgHover hover:scale-125 duration-300"
+						id="img" />
+				</div>
+				<div class="w-full" id="warp">
+					<img src="/res/IMGHost/IMG_7244.JPG"
+						class="inset-0 h-full w-full shadow-lg object-cover object-center rounded imgHover hover:scale-125 duration-300"
+						id="img" />
+				</div>
+				<div class="w-full" id="warp">
+					<img src="res/IMGHost/IMG_2338.JPG"
+						class="inset-0 h-full w-full shadow-lg object-cover object-center rounded imgHover hover:scale-125 duration-300"
+						id="img" />
+				</div>
 			</div>
 		</div>
 	</section>

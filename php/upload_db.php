@@ -17,7 +17,7 @@
             $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
 
             //allow certain file formats
-            $allowTypes = array('jpg','png','jpeg','gif');
+            $allowTypes = array('jpg','png','jpeg','gif','JPG');
             //check if file is already exists
                 if(in_array($fileType,$allowTypes)){
                     if(file_exists($targetFilePath)){
