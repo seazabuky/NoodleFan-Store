@@ -134,26 +134,26 @@
 			<div class="swiper-slide">
 				<img src="res/_SAL9154.JPG" alt="avatar" />
 				<figcaption class="absolute bottom-6 px-4 text-lg text-white border-b-gray-400">
-						<p>SONY A7III + 24-70mm f/2.8 GM</p>
-						</figcatpion>
+					<p>SONY A7III + 24-70mm f/2.8 GM</p>
+					</figcatpion>
 			</div>
 			<div class="swiper-slide">
 				<img src="res/LUA_9514.JPG" alt="mavic 3 pro" />
 				<figcaption class="absolute bottom-6 px-4 text-lg text-white border-b-gray-400">
-						<p>NIKON D5600 + 85mm f/1.8</p>
-						</figcatpion>
+					<p>NIKON D5600 + 85mm f/1.8</p>
+					</figcatpion>
 			</div>
 			<div class="swiper-slide">
 				<img src="res/_SAL7726.JPG" alt="t40" />
 				<figcaption class="absolute bottom-6 px-4 text-lg text-white border-b-gray-400">
-						<p>SONY A7III + 24-70mm f/2.8 GM</p>
-						</figcatpion>
+					<p>SONY A7III + 24-70mm f/2.8 GM</p>
+					</figcatpion>
 			</div>
 			<div class="swiper-slide" id="rs3content">
 				<img src="res/LUA_9832.JPG" alt="rs3" />
 				<figcaption class="absolute bottom-6 px-4 text-lg text-white border-b-gray-400">
-						<p>NIKON D5600 + 85mm f/1.8</p>
-						</figcatpion>
+					<p>NIKON D5600 + 85mm f/1.8</p>
+					</figcatpion>
 			</div>
 		</div>
 		<div class="swiper-button-prev"></div>
