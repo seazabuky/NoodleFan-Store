@@ -486,29 +486,30 @@
 			placement: 'center'
 		});
 
+		signInBtn.addEventListener('click', function() {
+			SignInModal.show();
+			RegisterModal.hide();
+			// set html style to overflow hidden to prevent scrolling
+			document.getElementsByTagName('html')[0].style.overflow = 'hidden';
+		});
+
 		regisBtnModal.addEventListener('click', function() {
 			SignInModal.hide();
 			RegisterModal.show();
-		});
-
-		signBtnModal.addEventListener('click', function() {
-			RegisterModal.hide();
-			SignInModal.show();
-		});
-
-		// if user click sign-in-btn show modal
-		signInBtn.addEventListener('click', function() {
-			SignInModal.show();
+			// set html style to overflow hidden to prevent scrolling
+			document.getElementsByTagName('html')[0].style.overflow = 'hidden';
 		});
 
 		const closemodalSignIn = document.getElementById('close');
 		closemodalSignIn.addEventListener('click', function() {
 			SignInModal.hide();
+			document.getElementsByTagName('html')[0].style.overflow = 'scroll';
 		});
 
 		const closemodalRegister = document.getElementById('close2');
 		closemodalRegister.addEventListener('click', function() {
 			RegisterModal.hide();
+			document.getElementsByTagName('html')[0].style.overflow = 'scroll';
 		});
 	</script>
 </body>
