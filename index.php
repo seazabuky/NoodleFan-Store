@@ -11,8 +11,8 @@
 	<!-- tailwindcss -->
 	<link href="https://unpkg.com/tailwindcss/dist/tailwind.min.css" rel="stylesheet">
 
-	<!-- elements -->
-
+	<!-- lordicon -->
+	<script src="https://cdn.lordicon.com/qjzruarw.js"></script>
 	<!-- flowbite -->
 	<link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.3/dist/flowbite.min.css" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.13.0/firebase-app.js"></script>
@@ -80,20 +80,43 @@
 			padding-right: 1em;
 			box-shadow: #000000;
 		}
+
+		html {
+			overflow: scroll;
+			overflow-x: hidden;
+		}
+
+		::-webkit-scrollbar {
+			width: 0;
+			/* Remove scrollbar space */
+			background: transparent;
+			/* Optional: just make scrollbar invisible */
+		}
+
+		/* Optional: show position indicator in red */
+		::-webkit-scrollbar-thumb {
+			background: #FF0000;
+		}
 	</style>
 </head>
 
 <body class="bg-white dark:bg-gray-900">
 	<?php
 	include("./php/server.php");
-	$btn_login = '<a href="signin.php" >Sign in</a>';
+	$btn_login = 'Sign in';
+	$btn_icon = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="inline-block ml-1 w-4 h-4 text-white xl:inline"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+	</svg>
+	';
+	$id_btn = 'btn_login';
 	if (@$_SESSION["role"] == 'admin' || @$_SESSION["role"] == 'user') {
-		$btn_login = '<a href="./php/logout.php" >Sign out</a>';
+		$btn_login = '<a href="./php/logout.php">Sign out</a>';
+		$id_btn = 'btn_logout';
+		$btn_icon = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="inline-block ml-1 w-4 h-4 text-white xl:inline"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" /></svg>';
 	}
 	?>
+
 	<!-- navbar float-->
 	<div class="fixed top-0 left-0 w-full z-50">
-		<!-- create navbar  -->
 		<nav class="bg-transparent px-2 sm:px-4 py-2.5 dark:bg-transparent fixed w-full z-20 top-0 left-0  ">
 			<div class="container flex flex-wrap justify-between items-center mx-auto">
 				<a href="https://flowbite.com/" class="flex items-center">
@@ -101,7 +124,11 @@
 					<span class="self-center text-xl font-semibold whitespace-nowrap text-white">NoodleFan Store</span>
 				</a>
 				<div class="flex md:order-2">
-					<button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"><?php echo @$btn_login ?></button>
+					<!-- sign in and sign out btn -->
+
+					<button type="button" id="<?php echo @$id_btn ?>" class="text-white inline-block bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"><?php echo @$btn_login, @$btn_icon ?></button>
+
+					<!-- open menu -->
 					<button data-collapse-toggle="navbar-sticky" type="button" class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-sticky" aria-expanded="false">
 						<span class="sr-only">Open main menu</span>
 						<svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -188,10 +215,7 @@
 		</div>
 	</section>
 
-
-
 	<!-- Footer -->
-
 	<footer class="p-4 bg-gray-50 rounded-lg shadow md:px-6 md:py-8 dark:bg-gray-900">
 		<div class="sm:flex sm:items-center sm:justify-between">
 			<a href="https://flowbite.com/" class="flex items-center mb-4 sm:mb-0">
@@ -218,7 +242,137 @@
 		</span>
 	</footer>
 
+	<!-- Modal Popup -->
 
+	<div id="sign-in-popup" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
+		<div class="flex items-center justify-center h-screen px-10 py-8 mx-auto md:h-screen lg:py-0">
+			<div class="bg-white rounded-lg shadow w-auto dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+				<div class="p-10 space-y-4 md:space-y-6 sm:p-8">
+					<div class="flex justify-between space-x-6 pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-gray-600">
+						<h2 class="text-2xl mb-1 font-bold leading-tight tracking-tight text-blue-600 md:text-2xl dark:text-white">
+							Sign in to your account
+						</h2>
+						<button type="button" id="close" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="defaultModal">
+							<svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+								<path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+							</svg>
+							<span class="sr-only">Close</span>
+						</button>
+					</div>
+
+
+					<?php if (!empty(@$_SESSION["regisMsg"]) && @$_SESSION["regisMsg"] == "Register success") { ?>
+						<div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+							<strong class="font-bold">Success!</strong>
+							<span class="block sm:inline"><?php echo @$_SESSION["regisMsg"]; ?></span>
+							<span class="absolute top-0 bottom-0 right-0 px-4 py-3"></span>
+						</div>
+					<?php unset($_SESSION["regisMsg"]);
+					} ?>
+					<form class="space-y-4 md:space-y-6" action="./php/checkLogin.php" method="POST">
+						<label for="user-icon" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Your username</label>
+						<span class="text-red-600"><?php echo @$_SESSION['usrErr'];
+													unset($_SESSION['usrErr']); ?></span>
+						<div class="relative">
+							<div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-500 dark:text-gray-400">
+									<path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"></path>
+								</svg>
+							</div>
+							<input type="text" name="username" id="user-icon" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="username" required="" <?php if (!empty(@$_SESSION["username"])) {
+																																																																																																	} ?>>
+						</div>
+						<label for="key-icon" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Password</label>
+						<span class="text-red-600"><?php echo @$_SESSION['pwErr'];
+													unset($_SESSION['pwErr']); ?></span>
+						<div class="relative">
+							<div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-500 dark:text-gray-400">
+									<path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z"></path>
+								</svg>
+							</div>
+							<input type="password" name="password" id="key-icon" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="••••••••" required="">
+						</div>
+						<button type="submit" class="w-full text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 ">Sign in</button>
+						<p class="text-sm font-light text-gray-500 dark:text-gray-400">
+							Don’t have an account yet? <a id="regis_btn" class="font-medium text-blue-600 hover:underline dark:text-blue-500">Sign up</a>
+						</p>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="register-popup" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
+		<div class="flex items-center justify-center h-screen px-6 py-8 mx-auto md:h-screen lg:py-0">
+			<div class="bg-white rounded-lg shadow w-auto dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+				<div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+					<div class="flex justify-between space-x-6 pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-gray-600">
+						<h2 class="text-2xl mb-1 font-bold leading-tight tracking-tight text-blue-600 md:text-2xl dark:text-white">
+							Create your account
+						</h2>
+						<button type="button" id="close2" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="defaultModal">
+							<svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+								<path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+							</svg>
+							<span class="sr-only">Close</span>
+						</button>
+					</div>
+					<?php if (!empty(@$_SESSION["regisMsg"]) && @$_SESSION["regisMsg"] == "Register failed") { ?>
+						<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+							<strong class="font-bold">Failed!</strong>
+							<span class="block sm:inline"><?php echo @$_SESSION["regisMsg"]; ?></span>
+							<span class="absolute top-0 bottom-0 right-0 px-4 py-3"></span>
+						</div>
+
+					<?php unset($_SESSION["regisMsg"]);
+					} ?>
+					<form class="space-y-4 md:space-y-6" action="./php/add_account.php" method="POST">
+						<label for="user-icon" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Your username</label>
+						<span class="text-red-600"><?php echo @$_SESSION['usrErr'];
+													unset($_SESSION['usrErr']); ?></span>
+						<div class="relative">
+							<div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-500 dark:text-gray-400">
+									<path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"></path>
+								</svg>
+							</div>
+							<input type="text" name="username" id="user-icon" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="username" required="">
+
+						</div>
+
+						<label for="key-icon" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Password</label>
+						<span class="text-red-600"><?php echo @$_SESSION['pwErr'];
+													unset($_SESSION['pwErr']); ?></span>
+						<div class="relative">
+							<div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-500 dark:text-gray-400">
+									<path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z"></path>
+								</svg>
+							</div>
+							<input type="password" name="password" id="key-icon" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="••••••••" required="">
+						</div>
+						<label for="mail-icon" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Email</label>
+						<span class="text-red-600"><?php echo @$_SESSION['emailErr'];
+													unset($_SESSION['emailErr']); ?></span>
+						<div class="relative">
+							<div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-500 dark:text-gray-400">
+									<path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+								</svg>
+
+							</div>
+							<input type="email" name="email" id="mail-icon" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="example@gmail.com" required="">
+						</div>
+						<button type="submit" class="w-full text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 ">Create Account</button>
+						<p class="text-sm font-light text-gray-500 dark:text-gray-400">
+							Already have an account. <a id="sign_btn" class="font-medium text-blue-600 hover:underline dark:text-blue-500">Sign in</a>
+						</p>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 	<!-- dark mode script -->
 	<script>
 		var themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
@@ -312,6 +466,50 @@
 				}
 			}
 		};
+	</script>
+
+	<script>
+		// if user click sign-in-btn change to id to sign-out-btn
+		var signInBtn = document.getElementById('btn_login');
+		var signOutBtn = document.getElementById('btn_logout');
+		const modalSignIn = document.getElementById('sign-in-popup');
+		const modalRegister = document.getElementById('register-popup');
+
+		// get a element in modal sign in by id
+		var regisBtnModal = document.getElementById('regis_btn');
+		var signBtnModal = document.getElementById('sign_btn');
+		const SignInModal = new Modal(modalSignIn, {
+			placement: 'center'
+		});
+
+		const RegisterModal = new Modal(modalRegister, {
+			placement: 'center'
+		});
+
+		regisBtnModal.addEventListener('click', function() {
+			SignInModal.hide();
+			RegisterModal.show();
+		});
+
+		signBtnModal.addEventListener('click', function() {
+			RegisterModal.hide();
+			SignInModal.show();
+		});
+
+		// if user click sign-in-btn show modal
+		signInBtn.addEventListener('click', function() {
+			SignInModal.show();
+		});
+
+		const closemodalSignIn = document.getElementById('close');
+		closemodalSignIn.addEventListener('click', function() {
+			SignInModal.hide();
+		});
+
+		const closemodalRegister = document.getElementById('close2');
+		closemodalRegister.addEventListener('click', function() {
+			RegisterModal.hide();
+		});
 	</script>
 </body>
 
