@@ -112,13 +112,13 @@
             var username = $(this).closest('tr').find('td:eq(1)').text();
             var role_req = $(this).closest('tr').find('td:eq(2)').text();
             var approved_by = '<?php echo $_SESSION['username']; ?>';
-            var $filename = '<?php echo $filename ?>';
+            var filename = '<?php echo $filename ?>';
             var data = {
                 id: id,
                 username: username,
                 role_req: role_req,
                 approved_by: approved_by,
-                $filename:$filename
+                filename:$filename
             };
             $.ajax({
                 url: 'updateRoleUser.php',
@@ -136,8 +136,10 @@
     $(document).ready(function(){
         $('.delete').click(function(){
             var id = $(this).closest('tr').find('td:eq(0)').text();
+            var filename = '<?php echo $filename ?>';
             var data = {
-                id: id
+                id: id,
+                filename:filename
             };
             $.ajax({
                 url: 'deleteSubmitReq.php',
