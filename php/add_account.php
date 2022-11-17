@@ -39,16 +39,16 @@
         $stmt = $conn->prepare("INSERT INTO `user` (`username`, `password`, `role`, `email`) VALUES (?, ?, ?, ?)");
         $stmt->bind_param("ssss",$username,$password,$role,$email);
         if($stmt->execute()){
-            $_SESSION['regisMsg'] = "Register success";
+            $_SESSION['regisSucc'] = "Register success";
             $stmt->close();
             header("Location:../index.php");
         }
         else{
-            $_SESSION['regisMsg'] = "Register failed";
+            $_SESSION['regisErr'] = "Register failed";
             header("Location:../index.php");
         }
     }else{
-        $_SESSION['regisMsg'] = "Register failed";
+        $_SESSION['regisErr'] = "Register failed";
         header("Location:../index.php");
     }
     

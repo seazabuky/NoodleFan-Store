@@ -303,9 +303,15 @@
 						if (isset($_SESSION['loginErr'])) {
 							echo "<script>Swal.fire({
 									icon: 'error',
-									title: 'Oops...',
-									text: 'Username or password is incorrect!'
-								  })</script>";
+									title: '<strong>Oops...</strong>',
+									html: '<p>Username or password is incorrect!</p>',
+									showCloseButton: true,
+									focusConfirm: false,
+									confirmButtonText: 'Ok'
+								})
+								.then((result) => {
+									document.getElementById('sign_btn').click();
+								})</script>";
 							unset($_SESSION['loginErr']);
 						}
 						?>
@@ -383,15 +389,23 @@
 						</p>
 
 						<?php
-						if (isset($_SESSION['regisMsg'])) {
-							echo "<script>
-								Swal.fire(
-									'Good job!',
-									'You clicked the button!',
-									'success'
-								);
-								</script>";
+						if (isset($_SESSION['regisSucc'])) {
+							echo "<script>Swal.fire({
+								icon: 'success',
+								title: '<strong>Register success</strong>',
+								html: '<p>Click ok to sign in</p>',
+								showCloseButton: true,
+								focusConfirm: false,
+								confirmButtonText: 'Ok'
+							})
+							.then((result) => {
+								document.getElementById('sign_btn').click();
+							})</script>";
 							unset($_SESSION['regisMsg']);
+						} else if (isset($_SESSION['regisErr'])) {
+							echo "<script>
+								document.getElementById('regis_btn').click();
+								</script>";
 						}
 						?>
 					</form>
@@ -542,7 +556,7 @@
 			RegisterModal.hide();
 			document.getElementsByTagName('html')[0].style.overflow = 'scroll';
 		});
-		
+
 		//document.getElementById("regis_btn").click();
 	</script>
 
