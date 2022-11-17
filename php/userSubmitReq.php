@@ -77,7 +77,7 @@
 				<div class="hidden justify-between items-center w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
 					<ul class="flex flex-col p-4 mt-4 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:bg-blue-100 lg:bg-transparent">
 						<li>
-							<a href="pricetable.php" class="block py-2 pr-4 pl-3 text-white rounded md:hover:bg-blue-500 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">Product</a>
+							<a href="../pricetable.php" class="block py-2 pr-4 pl-3 text-white rounded md:hover:bg-blue-500 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">Product</a>
 						</li>
 							<li>
 								<a href="orderCheck.php" class="block py-2 pr-4 pl-3 text-white rounded md:hover:bg-gray-50 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">Order</a>
@@ -98,10 +98,10 @@
 		</nav>
 <div class="relative p-10 bg-gray-700">
 </div>
-    <div class="container mx-auto">
-        <div class="flex flex-col justify-center px-6 my-12">
+<div class="container mx-auto pt-50">
+        <div class="flex flex-col justify-center px-6">
             <div class="w-full flex">
-                <div class="w-full bg-white p-5 rounded-lg lg:rounded-l-none">
+                <div class="w-full bg-gray-50 p-5 shadow-xl ring-1 ring-gray-900/5 rounded-lg lg:rounded-l-none">
                     <h3 class="pt-4 text-2xl text-center">Select your plan</h3>
                     <form class="px-8 pt-6 pb-8 mb-4 bg-white rounded" action="addReqUser.php" method="POST" enctype="multipart/form-data">
                         <div class="mb-4">
@@ -120,7 +120,7 @@
                             <label class="block mb-3 text-sm font-bold text-gray-700" for="image">
                                 Image Receipt
                             </label>
-                            <input class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border border-black-500 rounded shadow appearance-none focus:outline-none focus:shadow-outline" id="image" type="file" name="file" accept="image/gif,image/jpg,image/jpeg,image/png">
+                            <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:border-gray-600 dark:placeholder-gray-400 id="image" type="file" name="file" accept="image/gif,image/jpg,image/jpeg,image/png">
                             <p class="text-xs italic text-grey-500">Only JPG , JPEG , PNG file are allow to upload.</p>
                         </div>
                         <div class="mb-6 text-center">
@@ -148,30 +148,5 @@
             </div>
         </div>
     </div>
-    <footer class="p-4 bg-gray-50 rounded-lg shadow md:px-6 md:py-8 dark:bg-gray-700">
-		<div class="sm:flex sm:items-center sm:justify-between">
-			<a href="#" class="flex items-center mb-4 sm:mb-0">
-				<img src="https://cdn-icons-png.flaticon.com/512/1471/1471262.png" class="mr-3 h-8" alt="Flowbite Logo" />
-				<span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">NoodleFan</span>
-			</a>
-			<ul class="flex flex-wrap items-center mb-6 text-sm text-gray-500 sm:mb-0 dark:text-gray-400">
-				<li>
-					<a href="#" class="mr-4 hover:underline md:mr-6 ">About</a>
-				</li>
-				<li>
-					<a href="#" class="mr-4 hover:underline md:mr-6">Privacy Policy</a>
-				</li>
-				<li>
-					<a href="#" class="mr-4 hover:underline md:mr-6 ">Licensing</a>
-				</li>
-				<li>
-					<a href="#" class="hover:underline">Contact</a>
-				</li>
-			</ul>
-		</div>
-		<hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
-		<span class="block text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2022 <a href="" class="hover:underline">NoodleFan™</a>. All Rights Reserved.
-		</span>
-	</footer>
 </body>
 </html>
