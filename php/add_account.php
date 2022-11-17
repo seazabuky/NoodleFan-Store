@@ -10,15 +10,12 @@
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         if (!empty($_POST["username"])) {
             $username = $_POST["username"];
-            $_SESSION["usrErr"] = "";
         }
         if (!empty($_POST["password"])) {
             $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
-            $_SESSION["pwErr"] = "";
         }
         if (!empty($_POST["email"])) {
             $email = $_POST["email"];
-            $_SESSION["emailErr"] = "";
         }
     }
     $sql = "SELECT * FROM user WHERE username='$username' or email='$email' ";
@@ -27,11 +24,11 @@
         while($row = $result->fetch_assoc()) {
             if($row["username"]==$username){
                 $usrErr = "Username already exists";
-                $_SESSION["usrErr"] = $usrErr;
+                $_SESSION["usrErrRegis"] = $usrErr;
             }
             if($row["email"]==$email){
                 $emailErr = "Email already exists";
-                $_SESSION["emailErr"] = $emailErr;
+                $_SESSION["emailErrRegis"] = $emailErr;
             }
         }
     }

@@ -97,6 +97,9 @@
 		::-webkit-scrollbar-thumb {
 			background: #FF0000;
 		}
+		#sign_btn , #regis_btn{
+			cursor:pointer;
+		}
 	</style>
 </head>
 
@@ -261,14 +264,13 @@
 						</button>
 					</div>
 
-					<?php if (!empty(@$_SESSION["regisMsg"]) && @$_SESSION["regisMsg"] == "Register success") { ?>
+					<?php if (!empty(@$_SESSION["regisSucc"])) { ?>
 						<div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
 							<strong class="font-bold">Success!</strong>
-							<span class="block sm:inline"><?php echo @$_SESSION["regisMsg"]; ?></span>
+							<span class="block sm:inline"><?php echo @$_SESSION["regisSucc"]; ?></span>
 							<span class="absolute top-0 bottom-0 right-0 px-4 py-3"></span>
 						</div>
-					<?php echo '<script type="text/javascript">', 'document.getElementById("btn_login").click();', '</script>';
-						unset($_SESSION["regisMsg"]);
+					<?php 
 					} ?>
 					<form class="space-y-4 md:space-y-6" action="./php/checkLogin.php" method="POST">
 						<label for="user-icon" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Your username</label>
@@ -335,20 +337,18 @@
 							<span class="sr-only">Close</span>
 						</button>
 					</div>
-					<?php if (!empty(@$_SESSION["regisMsg"]) && @$_SESSION["regisMsg"] == "Register failed") { ?>
+					<?php if (!empty(@$_SESSION["regisFail"])) { ?>
 						<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
 							<strong class="font-bold">Failed!</strong>
-							<span class="block sm:inline"><?php echo @$_SESSION["regisMsg"]; ?></span>
+							<span class="block sm:inline"><?php echo @$_SESSION["regisFail"]; ?></span>
 							<span class="absolute top-0 bottom-0 right-0 px-4 py-3"></span>
 						</div>
 
-					<?php echo '<script type="text/javascript">', 'document.getElementById("regis_btn").click();', '</script>';
-						unset($_SESSION["regisMsg"]);
+					<?php
 					} ?>
 					<form class="space-y-4 md:space-y-6" action="./php/add_account.php" method="POST">
 						<label for="user-icon" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Your username</label>
-						<span class="text-red-600"><?php echo @$_SESSION['usrErr'];
-													unset($_SESSION['usrErr']); ?></span>
+						<span class="text-red-600"><?php if(isset($_SESSION['usrErrRegis'])){ echo @$_SESSION['usrErrRegis'];unset($_SESSION['usrErrRegis']);} ?></span>
 						<div class="relative">
 							<div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
 								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-500 dark:text-gray-400">
@@ -360,8 +360,7 @@
 						</div>
 
 						<label for="key-icon" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Password</label>
-						<span class="text-red-600"><?php echo @$_SESSION['pwErr'];
-													unset($_SESSION['pwErr']); ?></span>
+						<span class="text-red-600"><?php  if(isset($_SESSION['pwErrRegis'])){echo $_SESSION['pwErrRegis'];unset($_SESSION['pwErrRegis']);} ?></span>
 						<div class="relative">
 							<div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
 								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-500 dark:text-gray-400">
@@ -371,8 +370,7 @@
 							<input type="password" name="password" id="key-icon" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="••••••••" required="">
 						</div>
 						<label for="mail-icon" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Email</label>
-						<span class="text-red-600"><?php echo @$_SESSION['emailErr'];
-													unset($_SESSION['emailErr']); ?></span>
+						<span class="text-red-600"><?php if(isset($_SESSION['emailErrRegis'])){echo @$_SESSION['emailErrRegis'];unset($_SESSION['emailErrRegis']);} ?></span>
 						<div class="relative">
 							<div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
 								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-500 dark:text-gray-400">
