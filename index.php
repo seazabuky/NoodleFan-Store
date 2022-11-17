@@ -301,11 +301,15 @@
 						<?php
 						// if username and password is incorrect swal alert
 						if (isset($_SESSION['loginErr'])) {
+							echo '<script type="text/javascript">', 'const modalSignIn = document.getElementById("sign_btn");',
+							'modalSignIn.show();'
+							,'</script>';
 							echo "<script>Swal.fire({
 									icon: 'error',
 									title: 'Oops...',
 									text: 'Username or password is incorrect!'
-								  })</script>";
+								})
+								</script>";
 							unset($_SESSION['loginErr']);
 						}
 						?>
@@ -542,7 +546,8 @@
 			RegisterModal.hide();
 			document.getElementsByTagName('html')[0].style.overflow = 'scroll';
 		});
-		document.getElementById("regis_btn").click();
+
+		//document.getElementById("regis_btn").click();
 	</script>
 
 </body>
