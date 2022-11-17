@@ -66,6 +66,9 @@
                             <select class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border border-black-500 rounded shadow appearance-none focus:outline-none focus:shadow-outline" name="role_access" id="role_access">
                                 <option selected="true" disabled="disabled">Select role</option>
                                 <option value="user">User</option>
+                                <option value="premium">Premium</option>
+                                <option value="premium_p">Premium Plus</option>
+                                <option value="commercial">Commercial</option>
                                 <option value="admin">Admin</option>
                             </select>
                         </div>
