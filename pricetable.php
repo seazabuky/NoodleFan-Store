@@ -10,6 +10,7 @@
 	<link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/1471/1471262.png" />
 	<!-- tailwindcss -->
 	<link href="https://unpkg.com/tailwindcss/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
 	<!-- lordicon -->
 	<script src="https://cdn.lordicon.com/qjzruarw.js"></script>

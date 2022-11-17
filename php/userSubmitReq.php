@@ -109,7 +109,7 @@
                                 What you want package
                             </label>
                             <!-- select by use tailwindcss option first disable "select role" "user" "admin" -->
-                            <select class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border border-black-500 rounded shadow appearance-none focus:outline-none focus:shadow-outline" name="role_req" id="role_access">
+                            <select class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border border-black-500 rounded shadow appearance-none focus:outline-none focus:shadow-outline" name="role_req" id="role_access" onchange="topUp()">
                                 <option selected="true" disabled="disabled">Select package</option>
                                 <option value="premium">Premium</option>
                                 <option value="premium_p">Premium Plus</option>
@@ -127,6 +127,10 @@
                             <input class="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline" type="submit" name="submit" value="Upload">
                         </div>
                     </form>
+                    <h3 class="pt-4 text-2xl text-center font-bold mx-5" id="payment"></h3><br>
+                    <div class="hero container max-w-screen-lg mx-auto pb-10 flex">
+                        <img class="mx-auto object-cover" width="40%" src="../res/promptpay.jpeg">
+                    </div>
                 </div>
             </div>
             <div class="flex flex-col">
@@ -148,5 +152,17 @@
             </div>
         </div>
     </div>
+<script>
+    function topUp() {
+  var x = document.getElementById("role_access").value;
+    if(x=="premium")
+        document.getElementById("payment").innerHTML = "You have to pay 60 THB";
+    else if(x=="premium_p")
+        document.getElementById("payment").innerHTML = "You have to pay 150 THB";
+    else if(x=="commercial")
+        document.getElementById("payment").innerHTML = "You have to pay 1000 THB";
+    
+}
+</script>
 </body>
 </html>
