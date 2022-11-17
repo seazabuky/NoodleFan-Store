@@ -29,7 +29,7 @@
     <?php
         include("server.php");
         if(!isset($_SESSION['role'])){
-            header("Location:./index.php");
+            header("Location:../index.php");
         }
 
     ?>
