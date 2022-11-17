@@ -141,10 +141,10 @@
 						<li>
 							<a href="pricetable.php" class="block py-2 pr-4 pl-3 text-white rounded md:hover:bg-blue-500 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">Product</a>
 						</li>
-						<?php if(@$_SESSION['role']=='admin'){ ?>
-						<li>
-							<a href="./php/adminSubmitReq.php" class="block py-2 pr-4 pl-3 text-white rounded md:hover:bg-gray-50 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">Submit Req</a>
-						</li> <?php } ?>
+						<?php if (@$_SESSION['role'] == 'admin') { ?>
+							<li>
+								<a href="./php/adminSubmitReq.php" class="block py-2 pr-4 pl-3 text-white rounded md:hover:bg-gray-50 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">Submit Req</a>
+							</li> <?php } ?>
 						<li>
 							<a href="./php/upload.php" class="block py-2 pr-4 pl-3 text-white rounded md:hover:bg-gray-50 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">Upload Image</a>
 						</li>
@@ -280,7 +280,9 @@
 									<path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"></path>
 								</svg>
 							</div>
-							<input type="text" name="username" id="user-icon" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="username" required="" value="<?php if(isset($_COOKIE['username'])){echo $_COOKIE['username'];} ?>">
+							<input type="text" name="username" id="user-icon" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="username" required="" value="<?php if (isset($_COOKIE['username'])) {
+																																																																																																				echo $_COOKIE['username'];
+																																																																																																			} ?>">
 						</div>
 						<label for="key-icon" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Password</label>
 						<span class="text-red-600"><?php echo @$_SESSION['pwErr'];
@@ -305,7 +307,10 @@
 									icon: 'error',
 									title: 'Oops...',
 									text: 'Username or password is incorrect!'
-								  })</script>";
+								}).then((result) => {
+									document.getElementById('sign_btn').click();
+								})</script>";
+
 							unset($_SESSION['loginErr']);
 						}
 						?>
@@ -383,15 +388,25 @@
 						</p>
 
 						<?php
-						if (isset($_SESSION['regisMsg'])) {
+						if (isset($_SESSION['regisSucc'])) {
+							echo "<script>Swal.fire({
+								icon: 'success',
+								title: 'Registration Success',
+								text: 'Please Login',
+							}).then((result) => {
+								document.getElementById('sign_btn').click();
+							})</script>";
+							unset($_SESSION['regisSucc']);
+						} elseif (isset($_SESSION['regisFail'])) {
 							echo "<script>
-								Swal.fire(
-									'Good job!',
-									'You clicked the button!',
-									'success'
-								);
-								</script>";
-							unset($_SESSION['regisMsg']);
+							Swal.fire({
+								icon: 'error',
+								title: 'Something Wrong',
+								text: 'Please try again',
+							}).then((result) => {
+								document.getElementById('regis_btn').click();
+							})</script>";
+							unset($_SESSION['regisFail']);
 						}
 						?>
 					</form>
@@ -542,7 +557,7 @@
 			RegisterModal.hide();
 			document.getElementsByTagName('html')[0].style.overflow = 'scroll';
 		});
-		
+
 		//document.getElementById("regis_btn").click();
 	</script>
 

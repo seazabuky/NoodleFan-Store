@@ -44,11 +44,11 @@
             header("Location:../index.php");
         }
         else{
-            $_SESSION['regisErr'] = "Register failed";
+            $_SESSION['regisFail'] = "Register failed";
             header("Location:../index.php");
         }
     }else{
-        $_SESSION['regisErr'] = "Register failed";
+        $_SESSION['regisFail'] = "Register failed";
         header("Location:../index.php");
     }
     
