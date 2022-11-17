@@ -26,11 +26,11 @@
 </head>
 <body class="bg-white dark:bg-gray-900">
     <div class="fixed top-0 left-0 w-full z-50">
-		<nav class="bg-transparent px-2 sm:px-4 py-2.5 dark:bg-transparent fixed w-full z-20 top-0 left-0  ">
+		<nav class="bg-gray-700 bg-transparent px-2 sm:px-4 py-2.5 dark:bg-transparent fixed w-full z-20 top-0 left-0  ">
 			<div class="container flex flex-wrap justify-between items-center mx-auto">
 				<a href="index.php" class="flex items-center">
 					<img src="https://cdn-icons-png.flaticon.com/512/1471/1471262.png" class="mr-3 h-6 sm:h-9" alt="NoodleFans Logo">
-					<span class="self-center text-xl font-semibold whitespace-nowrap text-black">NoodleFan Store</span>
+					<span class="self-center text-xl font-semibold whitespace-nowrap text-white">NoodleFan Store</span>
 				</a>
 				<div class="flex md:order-2">
 					<!-- open menu -->
@@ -44,16 +44,16 @@
 				<div class="hidden justify-between items-center w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
 					<ul class="flex flex-col p-4 mt-4 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:bg-blue-100 lg:bg-transparent">
 						<li>
-							<a href="#" class="block py-2 pr-4 pl-3 text-black rounded md:hover:bg-blue-500 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">Product</a>
+							<a href="#" class="block py-2 pr-4 pl-3 text-white rounded md:hover:bg-blue-500 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">Product</a>
 						</li>
 						<li>
-							<a href="#" class="block py-2 pr-4 pl-3 text-black rounded md:hover:bg-gray-50 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">About</a>
+                            <a href="php/orderCheck.php" class="block py-2 pr-4 pl-3 text-white rounded md:hover:bg-gray-50 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">Order</a>
 						</li>
 						<li>
-							<a href="./php/upload.php" class="block py-2 pr-4 pl-3 text-black rounded md:hover:bg-gray-50 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">Upload Image</a>
+							<a href="php/upload.php" class="block py-2 pr-4 pl-3 text-white rounded md:hover:bg-gray-50 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">Upload Image</a>
 						</li>
 						<li>
-							<a href="#" class="block py-2 pr-4 pl-3 text-black rounded md:hover:bg-gray-50 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">Contact</a>
+                        <a href="php/adminSubmitReq.php" class="block py-2 pr-4 pl-3 text-white rounded md:hover:bg-gray-50 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">Admin Submit</a>
 						</li>
 					</ul>
 				</div>
@@ -160,11 +160,11 @@
       </div>
   </div>
 </section>
-<footer class="p-4 bg-gray-50 rounded-lg shadow md:px-6 md:py-8 dark:bg-gray-900">
+<footer class="p-4 bg-gray-700 rounded-lg shadow md:px-6 md:py-8 dark:bg-gray-900">
 		<div class="sm:flex sm:items-center sm:justify-between">
 			<a href="index.php" class="flex items-center mb-4 sm:mb-0">
 				<img src="https://cdn-icons-png.flaticon.com/512/1471/1471262.png" class="mr-3 h-8" alt="Flowbite Logo" />
-				<span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">NoodleFan</span>
+				<span class="text-gray-400 self-center text-2xl font-semibold whitespace-nowrap dark:text-white">NoodleFan</span>
 			</a>
 			<ul class="flex flex-wrap items-center mb-6 text-sm text-gray-500 sm:mb-0 dark:text-gray-400">
 				<li>
