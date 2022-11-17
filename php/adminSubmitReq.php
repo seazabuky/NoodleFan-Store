@@ -52,7 +52,7 @@
             while($row = $result->fetch_assoc()) {
                 $imageURL = '../receipt/'.$row["file_name"];
                 $filename = $row["file_name"];
-                echo "<tbody><tr><td>" . $row["id"]. "</td><td>" . $row["username_req"]. "</td><td>" . $row["role_req"]. "</td><td>" . $row["current_role"]. "</td><td>" . $row["status"]. "</td><td><img src=".$imageURL ." alt='' width='100%'>".'</td><td class="approve"><span class="material-symbols-outlined">approve</span></td><td class="delete"><span class="material-symbols-outlined">
+                echo "<tbody><tr><td>" . $row["id"]. "</td><td>" . $row["username_req"]. "</td><td>" . $row["role_req"]. "</td><td>" . $row["current_role"]. "</td><td>" . $row["status"]. "</td><td><img src=".$imageURL ." alt='' width='20%'>".'</td><td class="approve"><span class="material-symbols-outlined">approve</span></td><td class="delete"><span class="material-symbols-outlined">
                 delete
                 </span></td></tr></tbody>';
             }
@@ -100,7 +100,7 @@
                 id: id
             };
             $.ajax({
-                url: 'delete.php',
+                url: 'deleteSubmitReq.php',
                 type: 'POST',
                 data: data,
                 success: function(response){

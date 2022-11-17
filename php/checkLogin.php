@@ -19,16 +19,15 @@
           $_SESSION['username'] = $username;
           $_SESSION['password'] = $password;
           $role = $row['role'];
+          $_SESSION['role']=$role;
         }
     }
   }
     if($role == 'admin'){
-      $_SESSION['role'] = $role;
       header("Location:../index.php");
       setcookie("username", $username, time() + (86400 * 30), "/");
     }
-    else if($role == 'user'){
-      $_SESSION['role'] = $role;
+    else if(isset($_SESSION['role'])){
       header("Location:../index.php");
       setcookie("username", $username, time() + (86400 * 30), "/");
     }else{
