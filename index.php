@@ -266,7 +266,8 @@
 							<span class="block sm:inline"><?php echo @$_SESSION["regisMsg"]; ?></span>
 							<span class="absolute top-0 bottom-0 right-0 px-4 py-3"></span>
 						</div>
-					<?php echo '<script type="text/javascript">','document.getElementById("btn_login").click();','</script>' ; unset($_SESSION["regisMsg"]);
+					<?php echo '<script type="text/javascript">', 'document.getElementById("btn_login").click();', '</script>';
+						unset($_SESSION["regisMsg"]);
 					} ?>
 					<form class="space-y-4 md:space-y-6" action="./php/checkLogin.php" method="POST">
 						<label for="user-icon" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Your username</label>
@@ -296,6 +297,18 @@
 						<p class="text-sm font-light text-gray-500 dark:text-gray-400">
 							Don’t have an account yet? <a id="regis_btn" class="font-medium text-blue-600 hover:underline dark:text-blue-500">Sign up</a>
 						</p>
+
+						<?php
+						// if username and password is incorrect swal alert
+						if (isset($_SESSION['loginErr'])) {
+							echo "<script>Swal.fire({
+									icon: 'error',
+									title: 'Oops...',
+									text: 'Username or password is incorrect!'
+								  })</script>";
+							unset($_SESSION['loginErr']);
+						}
+						?>
 					</form>
 				</div>
 			</div>
@@ -324,7 +337,8 @@
 							<span class="absolute top-0 bottom-0 right-0 px-4 py-3"></span>
 						</div>
 
-					<?php echo '<script type="text/javascript">','document.getElementById("regis_btn").click();','</script>' ; unset($_SESSION["regisMsg"]);
+					<?php echo '<script type="text/javascript">', 'document.getElementById("regis_btn").click();', '</script>';
+						unset($_SESSION["regisMsg"]);
 					} ?>
 					<form class="space-y-4 md:space-y-6" action="./php/add_account.php" method="POST">
 						<label for="user-icon" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Your username</label>
@@ -367,6 +381,19 @@
 						<p class="text-sm font-light text-gray-500 dark:text-gray-400">
 							Already have an account. <a id="sign_btn" class="font-medium text-blue-600 hover:underline dark:text-blue-500">Sign in</a>
 						</p>
+
+						<?php
+						if (isset($_SESSION['regisMsg'])) {
+							echo "<script>
+								Swal.fire(
+									'Good job!',
+									'You clicked the button!',
+									'success'
+								);
+								</script>";
+							unset($_SESSION['regisMsg']);
+						}
+						?>
 					</form>
 				</div>
 			</div>
@@ -466,7 +493,7 @@
 			}
 		};
 	</script>
-		<script>
+	<script>
 		// if user click sign-in-btn change to id to sign-out-btn
 		var signInBtn = document.getElementById('btn_login');
 		var signOutBtn = document.getElementById('btn_logout');
@@ -483,6 +510,7 @@
 		const RegisterModal = new Modal(modalRegister, {
 			placement: 'center'
 		});
+
 		signInBtn.addEventListener('click', function() {
 			SignInModal.show();
 			RegisterModal.hide();

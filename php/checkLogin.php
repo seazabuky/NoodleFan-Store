@@ -34,12 +34,15 @@
     }else{
       if($usr_check != $username){
         $_SESSION['usrErr']="Username incorrect";
+
       }
       if($pw_check != $password){
         $_SESSION['pwErr']="Password incorrect";
       }
-      header("Location:../index.php");
+      $_SESSION['loginErr']="Login failed";
+      // header("Location:../index.php");
     }
+    header("Location:../index.php");
   $conn->close();
 
 ?>
