@@ -24,8 +24,8 @@
                         $_SESSION["userSubmitMsg"] = "Sorry, file already exists please change file name.";
                         header("LOCATION:userSubmitReq.php");
                     }else{
+                if($_POST["role_req"]!=$_SESSION['role']){
                     if(move_uploaded_file($_FILES["file"]["tmp_name"],$targetFilePath)){
-                        if($_POST["role_req"]!=$_SESSION['role']){
                         $insert = $conn->query("INSERT INTO `request`(`file_name`,`upload_on`,`username_req`,`role_req`,`current_role`) VALUES('".$fileName."',NOW(),'".$_SESSION["username"]."','".$_POST["role_req"]."','".$_SESSION["role"]."')");
                         if($insert){
                             $_SESSION["userSubmitMsg"] = "The file ".$fileName. " has been uploaded successfully.";
@@ -34,19 +34,20 @@
                             $_SESSION["userSubmitMsg"] = "File upload failed, please try again.";
                             header("LOCATION:userSubmitReq.php");
                             }
-                        }else{
-                            $_SESSION["userSubmitMsg"] = "This account already use package you select.";
-                            header("LOCATION:userSubmitReq.php");
-                        }
+                       
                         }else{
                             $_SESSION["userSubmitMsg"] = "Sorry, there was an error uploading your file.";
                             header("LOCATION:userSubmitReq.php");
                         }
+                    }else{
+                        $_SESSION["userSubmitMsg"] = "This account already use package you select.";
+                        header("LOCATION:userSubmitReq.php");
                     }
-                }else{
-                    $_SESSION["userSubmitMsg"] = "Sorry, only JPG, JPEG, PNG files are allowed to upload.";
-                    header("LOCATION:userSubmitReq.php");
                 }
+            }else{
+                $_SESSION["userSubmitMsg"] = "Sorry, only JPG, JPEG, PNG files are allowed to upload.";
+                header("LOCATION:userSubmitReq.php");
+            }
         }else{
             $_SESSION["userSubmitMsg"] = "Please select a file or package to submit.";
             header("LOCATION:userSubmitReq.php");
