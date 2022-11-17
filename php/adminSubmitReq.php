@@ -30,7 +30,15 @@
     <?php
         include("server.php");
         if(@$_SESSION['role']!='admin'){
-            header("Location:./foo.php");
+        header("Location:./foo.php");
+        }
+        $btn_login = 'Sign in';
+        $btn_icon = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="inline-block ml-1 w-4 h-4 text-white xl:inline"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" /></svg>';
+        $id_btn = 'btn_login';
+        if (isset($_SESSION['role'])) {
+            $btn_login = '<a href="logout.php">Sign out</a>';
+            $id_btn = 'btn_logout';
+            $btn_icon = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="inline-block ml-1 w-4 h-4 text-white xl:inline"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" /></svg>';
         }
 
     ?>
@@ -42,6 +50,7 @@
 					<span class="self-center text-xl font-semibold whitespace-nowrap text-white">NoodleFan Store</span>
 				</a>
                 <div class="flex md:order-2">
+                <button type="button" id="<?php echo @$id_btn ?>" class="text-white inline-block bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"><?php echo @$btn_login, @$btn_icon ?></button>
 					<!-- open menu -->
 					<button data-collapse-toggle="navbar-sticky" type="button" class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-sticky" aria-expanded="false">
 						<span class="sr-only">Open main menu</span>
@@ -69,7 +78,7 @@
 				</div>
 			</div>
             <div class="absolute top-0 right-0 mr-5 mt-5">
-            <a href="../index.php" class="transition-all delay-150 duration-0 ease-in-out hover:duration-150 text-white mx-1 p-1 border-solid border-sky-300 border-2 rounded-xl bg-sky-300 hover:bg-sky-700 hover:text-lg hover:p-2 hover:drop-shadow-lg">Back</a>
+
             </div>
 		</nav>
 	</div>
