@@ -99,7 +99,7 @@
                 id: id
             };
             $.ajax({
-                url: 'delete.php',
+                url: 'deleteSubmitReq.php',
                 type: 'POST',
                 data: data,
                 success: function(response){
