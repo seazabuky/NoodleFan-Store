@@ -1,6 +1,6 @@
 <?php
     session_start();
-    if(@$_SESSION["role"] == 'admin' || @$_SESSION["role"] == 'user'){
+    if(isset($_SESSION['role'])){
         header("Location:../index.php");
     }
     include("server.php");
@@ -41,6 +41,7 @@
         if($stmt->execute()){
             $_SESSION['regisMsg'] = "Register success";
             $stmt->close();
+            header("Location:../index.php");
         }
         else{
             $_SESSION['regisMsg'] = "Register failed";

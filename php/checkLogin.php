@@ -38,7 +38,7 @@
       if($pw_check != $password){
         $_SESSION['pwErr']="Password incorrect";
       }
-      // header("Location:../signin.php");
+      header("Location:../index.php");
     }
   $conn->close();
 

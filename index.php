@@ -108,7 +108,7 @@
 	</svg>
 	';
 	$id_btn = 'btn_login';
-	if (@$_SESSION["role"] == 'admin' || @$_SESSION["role"] == 'user') {
+	if (isset($_SESSION['role'])) {
 		$btn_login = '<a href="./php/logout.php">Sign out</a>';
 		$id_btn = 'btn_logout';
 		$btn_icon = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="inline-block ml-1 w-4 h-4 text-white xl:inline"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" /></svg>';
@@ -260,14 +260,13 @@
 						</button>
 					</div>
 
-
 					<?php if (!empty(@$_SESSION["regisMsg"]) && @$_SESSION["regisMsg"] == "Register success") { ?>
 						<div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
 							<strong class="font-bold">Success!</strong>
 							<span class="block sm:inline"><?php echo @$_SESSION["regisMsg"]; ?></span>
 							<span class="absolute top-0 bottom-0 right-0 px-4 py-3"></span>
 						</div>
-					<?php unset($_SESSION["regisMsg"]);
+					<?php echo '<script type="text/javascript">','document.getElementById("btn_login").click();','</script>' ; unset($_SESSION["regisMsg"]);
 					} ?>
 					<form class="space-y-4 md:space-y-6" action="./php/checkLogin.php" method="POST">
 						<label for="user-icon" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Your username</label>
@@ -325,7 +324,7 @@
 							<span class="absolute top-0 bottom-0 right-0 px-4 py-3"></span>
 						</div>
 
-					<?php unset($_SESSION["regisMsg"]);
+					<?php echo '<script type="text/javascript">','document.getElementById("regis_btn").click();','</script>' ; unset($_SESSION["regisMsg"]);
 					} ?>
 					<form class="space-y-4 md:space-y-6" action="./php/add_account.php" method="POST">
 						<label for="user-icon" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Your username</label>
@@ -467,8 +466,7 @@
 			}
 		};
 	</script>
-
-	<script>
+		<script>
 		// if user click sign-in-btn change to id to sign-out-btn
 		var signInBtn = document.getElementById('btn_login');
 		var signOutBtn = document.getElementById('btn_logout');
@@ -485,7 +483,6 @@
 		const RegisterModal = new Modal(modalRegister, {
 			placement: 'center'
 		});
-
 		signInBtn.addEventListener('click', function() {
 			SignInModal.show();
 			RegisterModal.hide();
@@ -496,6 +493,12 @@
 		regisBtnModal.addEventListener('click', function() {
 			SignInModal.hide();
 			RegisterModal.show();
+			// set html style to overflow hidden to prevent scrolling
+			document.getElementsByTagName('html')[0].style.overflow = 'hidden';
+		});
+		signBtnModal.addEventListener('click', function() {
+			SignInModal.show();
+			RegisterModal.hide();
 			// set html style to overflow hidden to prevent scrolling
 			document.getElementsByTagName('html')[0].style.overflow = 'hidden';
 		});
@@ -511,7 +514,9 @@
 			RegisterModal.hide();
 			document.getElementsByTagName('html')[0].style.overflow = 'scroll';
 		});
+		document.getElementById("regis_btn").click();
 	</script>
+
 </body>
 
 </html>
