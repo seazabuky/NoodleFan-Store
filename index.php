@@ -142,7 +142,7 @@
 							<a href="pricetable.php" class="block py-2 pr-4 pl-3 text-white rounded md:hover:bg-blue-500 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">Product</a>
 						</li>
 						<li>
-							<a href="#" class="block py-2 pr-4 pl-3 text-white rounded md:hover:bg-gray-50 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">About</a>
+							<a href="./php/adminSubmitReq.php" class="block py-2 pr-4 pl-3 text-white rounded md:hover:bg-gray-50 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">Submit Req</a>
 						</li>
 						<li>
 							<a href="./php/upload.php" class="block py-2 pr-4 pl-3 text-white rounded md:hover:bg-gray-50 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">Upload Image</a>
@@ -303,15 +303,9 @@
 						if (isset($_SESSION['loginErr'])) {
 							echo "<script>Swal.fire({
 									icon: 'error',
-									title: '<strong>Oops...</strong>',
-									html: '<p>Username or password is incorrect!</p>',
-									showCloseButton: true,
-									focusConfirm: false,
-									confirmButtonText: 'Ok'
-								})
-								.then((result) => {
-									document.getElementById('sign_btn').click();
-								})</script>";
+									title: 'Oops...',
+									text: 'Username or password is incorrect!'
+								  })</script>";
 							unset($_SESSION['loginErr']);
 						}
 						?>
@@ -389,23 +383,15 @@
 						</p>
 
 						<?php
-						if (isset($_SESSION['regisSucc'])) {
-							echo "<script>Swal.fire({
-								icon: 'success',
-								title: '<strong>Register success</strong>',
-								html: '<p>Click ok to sign in</p>',
-								showCloseButton: true,
-								focusConfirm: false,
-								confirmButtonText: 'Ok'
-							})
-							.then((result) => {
-								document.getElementById('sign_btn').click();
-							})</script>";
-							unset($_SESSION['regisMsg']);
-						} else if (isset($_SESSION['regisErr'])) {
+						if (isset($_SESSION['regisMsg'])) {
 							echo "<script>
-								document.getElementById('regis_btn').click();
+								Swal.fire(
+									'Good job!',
+									'You clicked the button!',
+									'success'
+								);
 								</script>";
+							unset($_SESSION['regisMsg']);
 						}
 						?>
 					</form>
@@ -556,7 +542,7 @@
 			RegisterModal.hide();
 			document.getElementsByTagName('html')[0].style.overflow = 'scroll';
 		});
-
+		
 		//document.getElementById("regis_btn").click();
 	</script>
 

@@ -50,6 +50,7 @@
             echo '<table id="sortme" class="table-auto"><thead><tr><th data-type="number">ID <i style="font-size:10px" class="fa">&#xf0dc;</i></th><th>Username <i style="font-size:10px" class="fa">&#xf0dc;</i></th><th>Role Request <i style="font-size:10px" class="fa">&#xf0dc;</i></th><th>Current Role <i style="font-size:10px" class="fa">&#xf0dc;</i></th><th>Status <i style="font-size:10px" class="fa">&#xf0dc;</i></th><th>Receipt <i style="font-size:10px" class="fa">&#xf0dc;</i></th><th colspan="2">approve and remove</td></tr></thead>';
             while($row = $result->fetch_assoc()) {
                 $imageURL = '../receipt/'.$row["file_name"];
+                $filename = $row["file_name"];
                 echo "<tbody><tr><td>" . $row["id"]. "</td><td>" . $row["username_req"]. "</td><td>" . $row["role_req"]. "</td><td>" . $row["current_role"]. "</td><td>" . $row["status"]. "</td><td><img src=".$imageURL ." alt='' width='100%'>".'</td><td class="approve"><span class="material-symbols-outlined">approve</span></td><td class="delete"><span class="material-symbols-outlined">
                 delete
                 </span></td></tr></tbody>';
@@ -70,11 +71,13 @@
             var username = $(this).closest('tr').find('td:eq(1)').text();
             var role_req = $(this).closest('tr').find('td:eq(2)').text();
             var approved_by = '<?php echo $_SESSION['username']; ?>';
+            var $filename = '<?php echo $filename ?>';
             var data = {
                 id: id,
                 username: username,
                 role_req: role_req,
-                approved_by: approved_by
+                approved_by: approved_by,
+                $filename:$filename
             };
             $.ajax({
                 url: 'updateRoleUser.php',
