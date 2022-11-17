@@ -2,7 +2,7 @@
 // Include the database configuration file
     include ('server.php');
     if(!isset($_SESSION['role'])){
-        header("location:./index.php");
+        header("location:../index.php");
     }
 ?>
 <!DOCTYPE html>
