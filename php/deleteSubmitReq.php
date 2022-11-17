@@ -11,7 +11,7 @@ session_start();
     } else {
         echo "Error deleting record: " . $conn->error;
     }
-    header("Location:admin.php");
+    header("Location:adminSubmitReq.php");
     $conn->close();
 }
 ?>
