@@ -25,6 +25,18 @@
 	<link rel="stylesheet" href="CSS/App.css">
 	<script src="JS/App.js"></script>
 </head>
+<?php
+        session_start();
+        $btn_login = 'Sign in';
+        $btn_icon = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="inline-block ml-1 w-4 h-4 text-white xl:inline"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" /></svg>';
+        $id_btn = 'btn_login';
+        if (isset($_SESSION['role'])) {
+            $btn_login = '<a href="logout.php">Sign out</a>';
+            $id_btn = 'btn_logout';
+            $btn_icon = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="inline-block ml-1 w-4 h-4 text-white xl:inline"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" /></svg>';
+        }
+
+    ?>
 <body class="bg-white dark:bg-gray-900">
     <div class="fixed top-0 left-0 w-full z-50">
 		<nav class="bg-gray-700 bg-transparent px-2 sm:px-4 py-2.5 dark:bg-transparent fixed w-full z-20 top-0 left-0  ">
@@ -34,6 +46,7 @@
 					<span class="self-center text-xl font-semibold whitespace-nowrap text-white">NoodleFan Store</span>
 				</a>
 				<div class="flex md:order-2">
+                <button type="button" id="<?php echo @$id_btn ?>" class="text-white inline-block bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"><?php echo @$btn_login, @$btn_icon ?></button>
 					<!-- open menu -->
 					<button data-collapse-toggle="navbar-sticky" type="button" class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-sticky" aria-expanded="false">
 						<span class="sr-only">Open main menu</span>
@@ -50,7 +63,7 @@
 						<li>
                             <a href="php/orderCheck.php" class="block py-2 pr-4 pl-3 text-white rounded md:hover:bg-gray-50 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">Order</a>
 						</li>
-                        <?php session_start(); if(@$_SESSION['role']=='admin'){ ?>
+                        <?php if(@$_SESSION['role']=='admin'){ ?>
 						<li>
 							<a href="php/upload.php" class="block py-2 pr-4 pl-3 text-white rounded md:hover:bg-gray-50 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">Upload Image</a>
 						</li>
