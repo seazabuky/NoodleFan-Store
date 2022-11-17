@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/1471/1471262.png" />
     <title>Request Verify</title>
     <style>
@@ -44,16 +45,18 @@
         <div class="text-center">
             <p class="subpixel-antialiased text-xl my-10 font-bold underline">All request</p>
         </div>
+        <div class="overflow-x-auto relative">
         <?php
         $sql = "SELECT * FROM request WHERE status=0";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
-            echo '<table id="sortme" class="table-auto"><thead><tr><th data-type="number">ID <i style="font-size:10px" class="fa">&#xf0dc;</i></th><th>Username <i style="font-size:10px" class="fa">&#xf0dc;</i></th><th>Role Request <i style="font-size:10px" class="fa">&#xf0dc;</i></th><th>Current Role <i style="font-size:10px" class="fa">&#xf0dc;</i></th><th>Status <i style="font-size:10px" class="fa">&#xf0dc;</i></th><th>Receipt <i style="font-size:10px" class="fa">&#xf0dc;</i></th><th colspan="2">approve and remove</td></tr></thead>';
+            
+            echo '<table id="sortme" class="w-full text-sm text-left text-gray-500 dark:text-gray-400"><thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"><tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"><th data-type="number" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">ID <i style="font-size:10px" class="fa">&#xf0dc;</i></th><th class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">Username <i style="font-size:10px" class="fa">&#xf0dc;</i></th><th class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">Role Request <i style="font-size:10px" class="fa">&#xf0dc;</i></th><th class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">Current Role <i style="font-size:10px" class="fa">&#xf0dc;</i></th><th class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">Status <i style="font-size:10px" class="fa">&#xf0dc;</i></th><th class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">Receipt <i style="font-size:10px" class="fa">&#xf0dc;</i></th><th colspan="2" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">approve and remove</td></tr></thead>';
             while($row = $result->fetch_assoc()) {
                 $imageURL = '../receipt/'.$row["file_name"];
                 $filename = $row["file_name"];
-                echo "<tbody><tr><td>" . $row["id"]. "</td><td>" . $row["username_req"]. "</td><td>" . $row["role_req"]. "</td><td>" . $row["current_role"]. "</td><td>" . $row["status"]. "</td><td><img src=".$imageURL ." alt='' width='20%'>".'</td><td class="approve"><span class="material-symbols-outlined">approve</span></td><td class="delete"><span class="material-symbols-outlined">
-                delete
+                echo "<tbody><tr><td>" . $row["id"]. "</td><td>" . $row["username_req"]. "</td><td>" . $row["role_req"]. "</td><td>" . $row["current_role"]. "</td><td>" . $row["status"]. "</td><td><img src=".$imageURL ." alt='' width='20%'>".'</td><td class="approve"><span class="material-icons">done</span></td><td class="delete"><span class="material-icons">
+                close
                 </span></td></tr></tbody>';
             }
             echo "</table>";
@@ -62,6 +65,7 @@
         }
         $conn->close();
         ?>
+        <div>
     </div>
 </div>
 <script>
