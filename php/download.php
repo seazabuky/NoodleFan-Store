@@ -54,12 +54,12 @@
             </div>
             <div class="hidden justify-between items-center w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
                 <ul class="flex flex-col p-4 mt-4 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:bg-blue-100 lg:bg-transparent">
-                   <li>
-			<a href="all.php" class="block py-2 pr-4 pl-3 text-white rounded md:hover:bg-blue-500 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">All</a>
-			</li>
-			<li>
-			<a href="../pricetable.php" class="block py-2 pr-4 pl-3 text-white rounded md:hover:bg-blue-500 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">Product</a>
-			</li>
+                    <li>
+                        <a href="all.php" class="block py-2 pr-4 pl-3 text-white rounded md:hover:bg-blue-500 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">All</a>
+                    </li>
+                    <li>
+                        <a href="../pricetable.php" class="block py-2 pr-4 pl-3 text-white rounded md:hover:bg-blue-500 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">Product</a>
+                    </li>
                     <li>
                         <a href="orderCheck.php" class="block py-2 pr-4 pl-3 text-white rounded md:hover:bg-gray-50 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">Order</a>
                     </li>
@@ -77,7 +77,7 @@
         <div class="container lg:px-32 px-4 py-8 mx-auto items-center">
             <div class="grid grid-cols-4 grid-rows-4 grid-flow-col gap-2" id="card-grid">
                 <?php
-                $name=$_GET['name'];
+                $name = $_GET['name'];
                 $query = $conn->query("SELECT * FROM images where file_name='$name' ORDER BY uploaded_on DESC LIMIT 8 ");
                 if ($query->num_rows > 0) {
                     while ($row = $query->fetch_assoc()) {
