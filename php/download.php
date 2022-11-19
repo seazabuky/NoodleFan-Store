@@ -1,10 +1,4 @@
-<?php
-// Include the database configuration file
-include('server.php');
-if (@$_SESSION["role"] != 'admin') {
-    echo $_SESSION["role"];
-    header("location:./foo.php");
-}
+
 ?>
 <html lang="en">
 
@@ -22,15 +16,19 @@ if (@$_SESSION["role"] != 'admin') {
 
 <body>
     <?php
-    $btn_login = 'Sign in';
+    $btn_login = '<a href="./index.php?sign=sign">Sign in</a>';
     $btn_icon = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="inline-block ml-1 w-4 h-4 text-white xl:inline"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
 	</svg>
 	';
     $id_btn = 'btn_login';
+    include('server.php');
     if (isset($_SESSION['role'])) {
         $btn_login = '<a href="logout.php">Sign out</a>';
         $id_btn = 'btn_logout';
         $btn_icon = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="inline-block ml-1 w-4 h-4 text-white xl:inline"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" /></svg>';
+    }else{
+        $_SESSION['loginFirst'] = 'Please login first';
+        header('location: ../index.php');
     }
     ?>
 

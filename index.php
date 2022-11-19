@@ -170,25 +170,29 @@
 	<div class="swiper headerSwiper">
 		<div class="swiper-wrapper">
 			<div class="swiper-slide">
-				<img src="res/_SAL9154.JPG" alt="avatar" />
+			<?php $img1 = "_SAL9154.JPG" ?>
+			<a href="./php/download.php?name=<?php echo $img1; ?>"><img src="upload/<?php echo $img1; ?>" alt="avatar" /></a>
 				<figcaption class="absolute bottom-6 px-4 text-lg text-white border-b-gray-400">
 					<p>SONY A7III + 24-70mm f/2.8 GM</p>
 					</figcatpion>
 			</div>
 			<div class="swiper-slide">
-				<img src="res/LUA_9514.JPG" alt="mavic 3 pro" />
+			<?php $img2 = "LUA_9514.JPG" ?>
+			<a href="./php/download.php?name=<?php echo $img2; ?>"><img src="upload/<?php echo $img2; ?>" alt="mavic 3 pro" /></a>
 				<figcaption class="absolute bottom-6 px-4 text-lg text-white border-b-gray-400">
 					<p>NIKON D5600 + 85mm f/1.8</p>
 					</figcatpion>
 			</div>
 			<div class="swiper-slide">
-				<img src="res/_SAL7726.JPG" alt="t40" />
+			<?php $img3 = "_SAL7726.JPG" ?>
+			<a href="./php/download.php?name=<?php echo $img3; ?>"><img src="upload/<?php echo $img3; ?>" alt="t40" /></a>
 				<figcaption class="absolute bottom-6 px-4 text-lg text-white border-b-gray-400">
 					<p>SONY A7III + 24-70mm f/2.8 GM</p>
 					</figcatpion>
 			</div>
 			<div class="swiper-slide" id="rs3content">
-				<img src="res/LUA_9832.JPG" alt="rs3" />
+				<?php $img4 = "LUA_9832.JPG" ?>
+				<a href="./php/download.php?name=<?php echo $img4; ?>"><img src="upload/<?php echo $img4; ?>" alt="rs3" /></a>
 				<figcaption class="absolute bottom-6 px-4 text-lg text-white border-b-gray-400">
 					<p>NIKON D5600 + 85mm f/1.8</p>
 					</figcatpion>
@@ -217,7 +221,7 @@
 						$name = $row["file_name"];
 				?>
 						<div class="w-full row-span-2" id="warp">
-							<img src=<?php echo $imageURL ?> class="inset-0 h-full w-full shadow-lg object-cover object-center rounded imgHover hover:scale-115 duration-300" id="img" />
+						<a href="./php/download.php?name=<?php echo $name; ?>"><img src=<?php echo $imageURL ?> class="inset-0 h-full w-full shadow-lg object-cover object-center rounded imgHover hover:scale-115 duration-300" id="img" /></a>
 						</div>
 				<?php
 					}
