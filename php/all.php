@@ -27,7 +27,40 @@
 
 	<style>
 		#card-grid:hover>#warp:not(:hover) #img {
-			filter: brightness(0.5) saturate(0.5) contrast(1) blur(2px);
+			filter: brightness(0.5) saturate(0.25) contrast(1) blur(2px);
+		}
+
+		.img_access {
+			filter: none;
+		}
+
+		.img_access:hover {
+			filter: blur(2px);
+			transition-duration: 0.35s;
+		}
+
+		/* text slide up when # img_access hover */
+
+		.img_detail {
+			display: none;
+			opacity: 0;
+			transition: 0.45s;
+		}
+
+		.img_access:hover~.img_detail {
+			display: block;
+			opacity: 100;
+			animation: img_detail 0.45s cubic-bezier(0.65, 0, 0.35, 1) both
+		}
+
+		@keyframes img_detail {
+			0% {
+				transform: translateY(100px);
+			}
+
+			100% {
+				transform: translateY(0px);
+			}
 		}
 
 		.gradient-text {
@@ -81,10 +114,6 @@
 			line-height: 10px;
 			height: 4%;
 			border-radius: 50%;
-		}
-
-		.img-wrap:hover .material-symbols-outlined {
-			opacity: 1;
 		}
 	</style>
 </head>
@@ -223,75 +252,185 @@
 				<div class="grid grid-cols-4 grid-rows-4 grid-flow-col gap-2" id="card-grid">
 					<?php $accessLevel = @$_SESSION['role'];
 					if ($accessLevel == "user") {
-						$query = $conn->query("SELECT * FROM images where role_access = 'user'");
+						//$query = $conn->query("SELECT * FROM images where role_access = 'user'");
+						$query = $conn->query("SELECT * FROM images");
 						if ($query->num_rows > 0) {
 							while ($row = $query->fetch_assoc()) {
 								$imageURL = '../upload/' . $row["file_name"];
 								$id = $row["id"];
 								$dis = $row["dis"];
 					?>
-								<div class="w-full row-2" id="warp">
-									<figure class="relative max-w-sm transition-all w-full duration-300 cursor-pointer ">
+								<?php
+								if ($row["role_access"] == "user") {
+								?>
+									<figure class="relative max-w-sm transition-all w-full row-2 duration-300 cursor-pointer " id="warp">
 										<a href="./download.php?name=<?php echo $row["file_name"] ?>"><img src=<?php echo $imageURL ?> class="inset-0 h-full w-full shadow-lg object-cover object-center rounded imgHover hover:scale-115 duration-300" id="img" /></a>
 										<figcaption class="absolute bottom-6 px-4 text-lg text-white">
-											<p>Do you want to get notified when a new component is added to Flowbite?</p>
+											<p><?php echo $row["dis"] ?></p>
 											</figcatpion>
 									</figure>
-								</div>
+								<?php
+								} elseif ($row["role_access"] == "admin") {
+								?>
+									<figure class="relative max-w-sm transition-all w-full row-2 duration-300 cursor-pointer " id="warp">
+										<img src=<?php echo $imageURL ?> class="inset-0 h-full w-full shadow-lg object-cover object-center imgHover img_access rounded hover:scale-115 duration-300" id="img" />
+										<figcaption class=" absolute bottom-6 px-4 text-lg text-white img_detail">
+											<p>This Image <mark class="px-1 text-white bg-red-600 rounded">Admin</mark> can access only</p>
+											</figcatpion>
+									</figure>
+								<?php
+								} elseif ($row["role_access"] == "premium") {
+								?>
+									<figure class="relative max-w-sm transition-all w-full row-2 duration-300 cursor-pointer " id="warp">
+										<img src=<?php echo $imageURL ?> class="inset-0 h-full w-full shadow-lg object-cover object-center imgHover img_access rounded hover:scale-115 duration-300" id="img" />
+										<figcaption class=" absolute bottom-6 px-4 text-lg text-white img_detail">
+											<p>This Image <mark class="px-1 text-white bg-blue-600 rounded">Premium</mark> can access only</p>
+											</figcatpion>
+									</figure>
+								<?php
+								} elseif ($row["role_access"] == "premium_p") {
+								?>
+									<figure class="relative max-w-sm transition-all w-full row-2 duration-300 cursor-pointer " id="warp">
+										<img src=<?php echo $imageURL ?> class="inset-0 h-full w-full shadow-lg object-cover object-center imgHover img_access rounded hover:scale-115 duration-300" id="img" />
+										<figcaption class=" absolute bottom-6 px-4 text-lg text-white img_detail">
+											<p>This Image <mark class="px-1 text-white bg-pink-600 rounded">Premium plus</mark> can access only</p>
+											</figcatpion>
+									</figure>
+								<?php
+								} elseif ($row["role_access"] == "commercial") {
+								?>
+									<figure class="relative max-w-sm transition-all w-full row-2 duration-300 cursor-pointer " id="warp">
+										<img src=<?php echo $imageURL ?> class="inset-0 h-full w-full shadow-lg object-cover object-center imgHover img_access rounded hover:scale-115 duration-300" id="img" />
+										<figcaption class=" absolute bottom-6 px-4 text-lg text-white img_detail">
+											<p>This Image <mark class="px-1 text-white bg-yellow-400 rounded">commercial</mark> can access only</p>
+											</figcatpion>
+									</figure>
+								<?php
+								}
+								?>
 							<?php
 							}
 						}
 					} elseif ($accessLevel == "premium") {
-						$query = $conn->query("SELECT * FROM images where role_access = 'premium' OR role_access = 'user' ");
+						$query = $conn->query("SELECT * FROM images");
 						if ($query->num_rows > 0) {
 							while ($row = $query->fetch_assoc()) {
 								$imageURL = '../upload/' . $row["file_name"];
 								$id = $row["id"];
 								$dis = $row["dis"];
-
 							?>
-								<div class="w-full row-2" id="warp">
-									<a href="./download.php?name=<?php echo $row["file_name"] ?>"><img src=<?php echo $imageURL ?> class="inset-0 h-full w-full shadow-lg object-cover object-center rounded imgHover hover:scale-115 duration-300" id="img" /></a>
-									<figcaption class="absolute bottom-6 px-4 text-lg text-white border-b-gray-400">
-										<p><?php echo $dis ?></p>
-										</figcatpion>
-								</div>
+								<?php
+								if ($row["role_access"] == "user" or $row["role_access"] == "premium") {
+								?>
+									<figure class="relative max-w-sm transition-all w-full row-2 duration-300 cursor-pointer " id="warp">
+										<a href="./download.php?name=<?php echo $row["file_name"] ?>"><img src=<?php echo $imageURL ?> class="inset-0 h-full w-full shadow-lg object-cover object-center rounded imgHover hover:scale-115 duration-300" id="img" /></a>
+										<figcaption class="absolute bottom-6 px-4 text-lg text-white">
+											<p><?php echo $row["dis"] ?></p>
+											</figcatpion>
+									</figure>
+								<?php
+								} elseif ($row["role_access"] == "admin") {
+								?>
+									<figure class="relative max-w-sm transition-all w-full row-2 duration-300 cursor-pointer " id="warp">
+										<img src=<?php echo $imageURL ?> class="inset-0 h-full w-full shadow-lg object-cover object-center imgHover img_access rounded hover:scale-115 duration-300" id="img" />
+										<figcaption class=" absolute bottom-6 px-4 text-lg text-white img_detail">
+											<p>This Image <mark class="px-1 text-white bg-red-600 rounded">Admin</mark> can access only</p>
+											</figcatpion>
+									</figure>
+								<?php
+								} elseif ($row["role_access"] == "premium_p") {
+								?>
+									<figure class="relative max-w-sm transition-all w-full row-2 duration-300 cursor-pointer " id="warp">
+										<img src=<?php echo $imageURL ?> class="inset-0 h-full w-full shadow-lg object-cover object-center imgHover img_access rounded hover:scale-115 duration-300" id="img" />
+										<figcaption class=" absolute bottom-6 px-4 text-lg text-white img_detail">
+											<p>This Image <mark class="px-1 text-white bg-pink-600 rounded">Premium plus</mark> can access only</p>
+											</figcatpion>
+									</figure>
+								<?php
+								} elseif ($row["role_access"] == "commercial") {
+								?>
+									<figure class="relative max-w-sm transition-all w-full row-2 duration-300 cursor-pointer " id="warp">
+										<img src=<?php echo $imageURL ?> class="inset-0 h-full w-full shadow-lg object-cover object-center imgHover img_access rounded hover:scale-115 duration-300" id="img" />
+										<figcaption class=" absolute bottom-6 px-4 text-lg text-white img_detail">
+											<p>This Image <mark class="px-1 text-white bg-yellow-400 rounded">commercial</mark> can access only</p>
+											</figcatpion>
+									</figure>
+								<?php
+								}
+								?>
 							<?php
 							}
 						}
 					} else if ($accessLevel == "premium_p") {
-						$query = $conn->query("SELECT * FROM images where role_access = 'premium' OR role_access = 'user' ");
+						$query = $conn->query("SELECT * FROM images");
 						if ($query->num_rows > 0) {
 							while ($row = $query->fetch_assoc()) {
 								$imageURL = '../upload/' . $row["file_name"];
 								$id = $row["id"];
 								$dis = $row["dis"];
-
 							?>
-								<div class="w-full row-2" id="warp">
-									<a href="./download.php?name=<?php echo $row["file_name"] ?>"><img src=<?php echo $imageURL ?> class="inset-0 h-full w-full shadow-lg object-cover object-center rounded imgHover hover:scale-115 duration-300" id="img" /></a>
-									<figcaption class="absolute bottom-6 px-4 text-lg text-white border-b-gray-400">
-										<p><?php echo $dis ?></p>
-										</figcatpion>
-								</div>
+								<?php
+								if ($row["role_access"] == "user" or $row["role_access"] == "premium" or $row["role_access"] == "premium_p") {
+								?>
+									<figure class="relative max-w-sm transition-all w-full row-2 duration-300 cursor-pointer " id="warp">
+										<a href="./download.php?name=<?php echo $row["file_name"] ?>"><img src=<?php echo $imageURL ?> class="inset-0 h-full w-full shadow-lg object-cover object-center rounded imgHover hover:scale-115 duration-300" id="img" /></a>
+										<figcaption class="absolute bottom-6 px-4 text-lg text-white">
+											<p><?php echo $row["dis"] ?></p>
+											</figcatpion>
+									</figure>
+								<?php
+								} elseif ($row["role_access"] == "admin") {
+								?>
+									<figure class="relative max-w-sm transition-all w-full row-2 duration-300 cursor-pointer " id="warp">
+										<img src=<?php echo $imageURL ?> class="inset-0 h-full w-full shadow-lg object-cover object-center imgHover img_access rounded hover:scale-115 duration-300" id="img" />
+										<figcaption class=" absolute bottom-6 px-4 text-lg text-white img_detail">
+											<p>This Image <mark class="px-1 text-white bg-red-600 rounded">Admin</mark> can access only</p>
+											</figcatpion>
+									</figure>
+								<?php
+								} elseif ($row["role_access"] == "commercial") {
+								?>
+									<figure class="relative max-w-sm transition-all w-full row-2 duration-300 cursor-pointer " id="warp">
+										<img src=<?php echo $imageURL ?> class="inset-0 h-full w-full shadow-lg object-cover object-center imgHover img_access rounded hover:scale-115 duration-300" id="img" />
+										<figcaption class=" absolute bottom-6 px-4 text-lg text-white img_detail">
+											<p>This Image <mark class="px-1 text-white bg-yellow-400 rounded">commercial</mark> can access only</p>
+											</figcatpion>
+									</figure>
+								<?php
+								}
+								?>
 							<?php
 							}
 						}
 					} elseif ($accessLevel == "commercial") {
-						$query = $conn->query("SELECT * FROM images where role_access = 'premium' OR role_access = 'user' ");
+						$query = $conn->query("SELECT * FROM images");
 						if ($query->num_rows > 0) {
 							while ($row = $query->fetch_assoc()) {
 								$imageURL = '../upload/' . $row["file_name"];
 								$id = $row["id"];
 								$dis = $row["dis"];
-
 							?>
-								<div class="w-full row-2" id="warp">
-									<a href="./download.php?name=<?php echo $row["file_name"] ?>"><img src=<?php echo $imageURL ?> class="inset-0 h-full w-full shadow-lg object-cover object-center rounded imgHover hover:scale-115 duration-300" id="img" /></a>
-									<figcaption class="absolute bottom-6 px-4 text-lg text-white border-b-gray-400">
-										<p><?php echo $dis ?></p>
-										</figcatpion>
-								</div>
+								<?php
+								if ($row["role_access"] == "user" or $row["role_access"] == "premium" or $row["role_access"] == "premium_p" or $row["role_access"] == "commercial") {
+								?>
+									<figure class="relative max-w-sm transition-all w-full row-2 duration-300 cursor-pointer " id="warp">
+										<a href="./download.php?name=<?php echo $row["file_name"] ?>"><img src=<?php echo $imageURL ?> class="inset-0 h-full w-full shadow-lg object-cover object-center rounded imgHover hover:scale-115 duration-300" id="img" /></a>
+										<figcaption class="absolute bottom-6 px-4 text-lg text-white">
+											<p><?php echo $row["dis"] ?></p>
+											</figcatpion>
+									</figure>
+								<?php
+								} elseif ($row["role_access"] == "admin") {
+								?>
+									<figure class="relative max-w-sm transition-all w-full row-2 duration-300 cursor-pointer " id="warp">
+										<img src=<?php echo $imageURL ?> class="inset-0 h-full w-full shadow-lg object-cover object-center imgHover img_access rounded hover:scale-115 duration-300" id="img" />
+										<figcaption class=" absolute bottom-6 px-4 text-lg text-white img_detail">
+											<p>This Image <mark class="px-1 text-white bg-red-600 rounded">Admin</mark> can access only</p>
+											</figcatpion>
+									</figure>
+								<?php
+								}
+								?>
 							<?php
 							}
 						}
@@ -306,9 +445,6 @@
 							?>
 								<div class="w-full row-2" id="warp">
 									<a href="./download.php?name=<?php echo $row["file_name"] ?>"><img src=<?php echo $imageURL ?> class="inset-0 h-full w-full shadow-lg object-cover object-center rounded imgHover hover:scale-115 duration-300" id="img" /></a>
-									<figcaption class="absolute bottom-6 px-4 text-lg text-white border-b-gray-400">
-										<p><?php echo $dis ?></p>
-										</figcatpion>
 								</div>
 					<?php
 							}
