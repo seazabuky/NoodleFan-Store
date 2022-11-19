@@ -148,7 +148,7 @@
 		$btn_icon = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="inline-block ml-1 w-4 h-4 text-white xl:inline"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" /></svg>';
 	}
 	?>
-	<nav class="relative bg-gray-700 px-2 sm:px-4 py-2.5 dark:bg-transparent fixed w-full z-20 top-0 left-0  ">
+	<nav class="relative bg-gray-700 px-2 sm:px-4 py-2.5 dark:bg-transparent w-full z-20 top-0 left-0  ">
 		<div class="container flex flex-wrap justify-between items-center mx-auto">
 			<a href="../index.php" class="flex items-center">
 				<img src="https://cdn-icons-png.flaticon.com/512/1471/1471262.png" class="mr-3 h-6 sm:h-9" alt="NoodleFans Logo">
@@ -393,7 +393,7 @@
 									<figure class="relative max-w-sm transition-all w-full row-2 duration-300 cursor-pointer " id="warp">
 										<img src=<?php echo $imageURL ?> class="inset-0 h-full w-full shadow-lg object-cover object-center imgHover img_access rounded hover:scale-115 duration-300" id="img" />
 										<figcaption class=" absolute bottom-6 px-4 text-lg text-white img_detail">
-											<p>This Image <mark class="px-1 text-white bg-yellow-400 rounded">commercial</mark> can access only</p>
+											<p>This Image <mark class="px-1 text-white bg-amber-400 rounded">commercial</mark> can access only</p>
 											</figcatpion>
 									</figure>
 								<?php
