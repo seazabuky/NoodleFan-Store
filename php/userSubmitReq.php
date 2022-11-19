@@ -97,7 +97,7 @@ if (!isset($_SESSION['role'])) {
                 <div class="hidden justify-between items-center w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
                     <ul class="flex flex-col p-4 mt-4 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:bg-blue-100 lg:bg-transparent">
                         <li>
-                            <a href="./all.php" class="block py-2 pr-4 pl-3 text-white rounded md:hover:bg-blue-500 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">All</a>
+                            <a href="./all.php" class="block py-2 pr-4 pl-3 text-white rounded md:hover:bg-blue-500 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">Gallery</a>
                         </li>
                         <li>
                             <a href="#" class="block py-2 pr-4 pl-3 text-white rounded md:hover:bg-blue-500 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">Package</a>
@@ -132,12 +132,13 @@ if (!isset($_SESSION['role'])) {
                             </label>
 
                             <select class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="role_req" id="role_access" onchange="topUp()">
-                                <option selected="true" disabled="disabled">Select package</option>
                                 <?php if ($_SESSION['role'] == 'commercial') { ?>
                                     <option selected="true" disabled="disabled">You already commercial</option>
                                 <?php } elseif ($_SESSION['role'] == 'premium_p') { ?>
+                                    <option selected="true" disabled="disabled">Select package</option>
                                     <option value="commercial">Commercial</option>
                                 <?php } elseif ($_SESSION['role'] == 'premium') { ?>
+                                    <option selected="true" disabled="disabled">Select package</option>
                                     <option value="premium_p">Premium Plus</option>
                                     <option value="commercial">Commercial</option>
                                 <?php } else { ?>
