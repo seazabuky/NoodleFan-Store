@@ -175,7 +175,7 @@
       </div>
   </div>
 </section>
-<footer class="p-4 bg-gray-700 rounded-lg shadow md:px-6 md:py-8 dark:bg-gray-900">
+<footer class="p-4 bg-gray-700 shadow md:px-6 md:py-8 dark:bg-gray-900">
 		<div class="sm:flex sm:items-center sm:justify-between">
 			<a href="index.php" class="flex items-center mb-4 sm:mb-0">
 				<img src="https://cdn-icons-png.flaticon.com/512/1471/1471262.png" class="mr-3 h-8" alt="Flowbite Logo" />
