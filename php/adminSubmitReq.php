@@ -116,9 +116,7 @@
                     while ($row = $result->fetch_assoc()) {
                         $imageURL = '../receipt/' . $row["file_name"];
                         $filename = $row["file_name"];
-                        echo "<tbody><tr><td>" . $row["id"] . "</td><td>" . $row["username_req"] . "</td><td>" . $row["role_req"] . "</td><td>" . $row["current_role"] . "</td><td>" . $row["status"] . "</td><td><img src=" . $imageURL . " alt='' width='20%'>" . '</td><td class="approve"><span class="material-icons">done</span></td><td class="delete"><span class="material-icons">
-                close
-                </span></td></tr></tbody>';
+                        echo "<tbody><tr><td>" . $row["id"] . "</td><td>" . $row["username_req"] . "</td><td>" . $row["role_req"] . "</td><td>" . $row["current_role"] . "</td><td>" . $row["status"] . "</td><td><img src=" . $imageURL . " alt='' width='20%'>" . '</td><td class="approve"></td><td class="delete"></td></tr></tbody>';
                     }
                     echo "</table>";
                 } else {

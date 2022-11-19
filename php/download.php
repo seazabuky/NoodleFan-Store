@@ -1,6 +1,5 @@
-
-?>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
 
 <head>
     <meta charset="UTF-8">
@@ -40,10 +39,7 @@
                 <span class="self-center text-xl font-semibold whitespace-nowrap text-white">NoodleFan Store</span>
             </a>
             <div class="flex md:order-2">
-                <!-- sign in and sign out btn -->
-
                 <button type="button" id="<?php echo @$id_btn ?>" class="text-white inline-block bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"><?php echo @$btn_login, @$btn_icon ?></button>
-
                 <!-- open menu -->
                 <button data-collapse-toggle="navbar-sticky" type="button" class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-sticky" aria-expanded="false">
                     <span class="sr-only">Open main menu</span>
@@ -75,6 +71,30 @@
     </nav>
     <section class="overflow-hidden text-gray-700 mb-60 pt-10">
         <div class="container lg:px-32 px-4 py-8 mx-auto items-center">
+            <?php $name = $_GET['name'];
+    $query = $conn->query("SELECT * FROM images where file_name='$name' ");
+    if ($query->num_rows > 0) {
+        while ($row = $query->fetch_assoc()) {
+            $role_access=$row['role_access'];
+                if(!isset($_SESSION['role'])){
+                    $_SESSION['loginFirst'] = 'Please login first';
+                    header('location: ../index.php');
+                    break;
+                }else if($role_access=='premium'&&@$_SESSION['role']!='premium_p'&&@$_SESSION['role']!='commercial'&&@$_SESSION['role']!='premium'){
+                    echo '<div class="space-y-8 lg:grid lg:grid-cols-3 sm:gap-6 xl:gap-10 lg:space-y-0"><h1 class="mt-4 mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Please upgrade your package to <u>'.$role_access.'</u></h1>';
+                    echo '<a href="../pricetable.php" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Upgrade package</a>';
+                    echo '<a href="../index.php" class="w-full text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 mr-2 mb-2">Back</a></div>';
+                    break;
+                }else if($role_access=='premium_p'&&@$_SESSION['role']!='commercial'&&@$_SESSION['role']!='premium_p'){
+                    echo '<div class="space-y-8 lg:grid lg:grid-cols-3 sm:gap-6 xl:gap-10 lg:space-y-0"><h1 class="mt-4 mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Please upgrade your package to <u>'.$role_access.'</u></h1>';
+                    echo '<a href="../pricetable.php" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Upgrade package</a>';
+                    echo '<a href="../index.php" class="w-full text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 mr-2 mb-2">Back</a></div>';
+                    break;
+                }elseif($role_access=='commercial'&&@$_SESSION['role']!='admin'&&@$_SESSION['role']!='commercial'){
+                    echo '<div class="space-y-8 lg:grid lg:grid-cols-3 sm:gap-6 xl:gap-10 lg:space-y-0"><h1 class="mt-4 mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Please upgrade your package to <u>'.$role_access.'</u></h1>';
+                    echo '<a href="../pricetable.php" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Upgrade package</a>';
+                    echo '<a href="../index.php" class="w-full text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 mr-2 mb-2">Back</a></div>';
+                }else{ ?>
             <div class="grid grid-cols-4 grid-rows-4 grid-flow-col gap-2" id="card-grid">
                 <?php
                 $name = $_GET['name'];
@@ -95,6 +115,8 @@
                     }
                 } ?>
             </div>
+            <?php } } } 
+             ?>
         </div>
     </section>
 
