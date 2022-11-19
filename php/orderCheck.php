@@ -54,7 +54,8 @@
 	</svg>
 	';
     $id_btn = 'btn_login';
-    if (!isset($_SESSION['role'])) {
+    if(!isset($_SESSION['role'])){
+        $_SESSION['loginFirst']="Please login first";
         header("Location:../index.php");
     }
     if (isset($_SESSION['role'])) {

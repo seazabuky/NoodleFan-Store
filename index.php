@@ -408,6 +408,20 @@
 								document.getElementById('regis_btn').click();
 							})</script>";
 							unset($_SESSION['regisFail']);
+						}elseif(isset($_SESSION['loginFirst'])){
+							// login first
+							echo "<script>
+							Swal.fire({
+								icon: 'warning',
+								title: 'Please Login',
+								text: 'Please login and try again',
+							}).then((result) => {
+								document.getElementById('sign_btn').click();
+							})</script>";
+							unset($_SESSION['loginFirst']);
+						}elseif(isset($_GET['sign'])){
+							echo "<script>
+							</script>"; //ต้องการให้เด้งsign in เลยโดยไม่มีให้คลิก ok ก่อน
 						}
 						?>
 					</form>

@@ -27,7 +27,7 @@
 </head>
 <?php
         session_start();
-        $btn_login = 'Sign in';
+        $btn_login = '<a href="./index.php?sign=sign">Sign in</a>';
         $btn_icon = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="inline-block ml-1 w-4 h-4 text-white xl:inline"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" /></svg>';
         $id_btn = 'btn_login';
         if (isset($_SESSION['role'])) {
@@ -91,7 +91,6 @@
               <p class="font-light text-gray-500 sm:text-lg dark:text-gray-400">Best option for personal use and exclusive image.</p>
               <div class="flex justify-center items-baseline my-8">
                   <span class="mr-2 text-5xl font-extrabold">60 ฿</span>
-                  <span class="text-gray-500 dark:text-gray-400">/month</span>
               </div>
               <!-- List -->
               <ul role="list" class="mb-8 space-y-4 text-left">
@@ -111,7 +110,11 @@
                       <span>New image <span class="font-semibold">every month</span></span>
                   </li>
               </ul>
-              <a href="./php/userSubmitReq.php" class="w-full text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 ">Get Started</a>
+              <?php if(@$_SESSION['role']=='user'||@$_SESSION['role']=='admin'){ ?>
+                <a href="./php/userSubmitReq.php?role_req='commercial'" class="w-full text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 ">Get Started</a>
+                <?php }else{ ?>
+                    <button class="w-full text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2  dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 " disabled>Already</button>
+                <?php } ?>
           </div>
           <!-- Pricing Card -->
           <div class="flex flex-col p-6 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white">
@@ -119,7 +122,6 @@
               <p class="font-light text-gray-500 sm:text-lg dark:text-gray-400">access exclusive image and preset lightroom</p>
               <div class="flex justify-center items-baseline my-8">
                   <span class="mr-2 text-5xl font-extrabold">150 ฿</span>
-                  <span class="text-gray-500 dark:text-gray-400" dark:text-gray-400>/month</span>
               </div>
               <!-- List -->
               <ul role="list" class="mb-8 space-y-4 text-left">
@@ -135,15 +137,18 @@
                   </li>
                   
               </ul>
-              <a href="./php/userSubmitReq.php" class="w-full text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 ">Get Started</a>
+              <?php if(@$_SESSION['role']!='premium_p'&&@$_SESSION['role']!='commercial'){ ?>
+                <a href="./php/userSubmitReq.php?role_req='commercial'" class="w-full text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 ">Get Started</a>
+                <?php }else{ ?>
+                    <button class="w-full text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2  dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 " disabled>Already</button>
+                <?php } ?>
           </div>
           <!-- Pricing Card -->
           <div class="flex flex-col p-6 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white">
               <h3 class="mb-4 text-2xl font-semibold">Commercial</h3>
               <p class="font-light text-gray-500 sm:text-lg dark:text-gray-400">Best for large scale uses and extended redistribution rights.</p>
               <div class="flex justify-center items-baseline my-8">
-                  <span class="mr-2 text-5xl font-extrabold">$499</span>
-                  <span class="text-gray-500 dark:text-gray-400">/month</span>
+                  <span class="mr-2 text-5xl font-extrabold">3500 ฿</span>
               </div>
               <!-- List -->
               <ul role="list" class="mb-8 space-y-4 text-left">
@@ -173,7 +178,11 @@
                       <span>Free updates: <span class="font-semibold">36 months</span></span>
                   </li>
               </ul>
-              <a href="./php/userSubmitReq.php" class="w-full text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 ">Get Started</a>
+              <?php if(@$_SESSION['role']!='commercial'){ ?>
+                <a href="./php/userSubmitReq.php?role_req='commercial'" class="w-full text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 ">Get Started</a>
+                <?php }else{ ?>
+                    <button class="w-full text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2  dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 " disabled>Already</button>
+                <?php } ?>
           </div>
       </div>
   </div>
