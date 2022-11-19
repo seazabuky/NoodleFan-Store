@@ -8,6 +8,8 @@
 	<title>NoodleFan Store</title>
 
 	<link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/1471/1471262.png" />
+	<!-- JQuery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<!-- tailwindcss -->
 	<link href="https://unpkg.com/tailwindcss/dist/tailwind.min.css" rel="stylesheet">
 
@@ -97,8 +99,10 @@
 		::-webkit-scrollbar-thumb {
 			background: #FF0000;
 		}
-		#sign_btn , #regis_btn{
-			cursor:pointer;
+
+		#sign_btn,
+		#regis_btn {
+			cursor: pointer;
 		}
 	</style>
 </head>
@@ -147,16 +151,16 @@
 						<li>
 							<a href="pricetable.php" class="block py-2 pr-4 pl-3 text-white rounded md:hover:bg-blue-500 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">Product</a>
 						</li>
-							<li>
-								<a href="./php/orderCheck.php" class="block py-2 pr-4 pl-3 text-white rounded md:hover:bg-gray-50 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">Order</a>
-							</li>
-							<?php if(@$_SESSION['role']=='admin'){ ?>
 						<li>
-							<a href="./php/upload.php" class="block py-2 pr-4 pl-3 text-white rounded md:hover:bg-gray-50 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">Upload Image</a>
+							<a href="./php/orderCheck.php" class="block py-2 pr-4 pl-3 text-white rounded md:hover:bg-gray-50 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">Order</a>
 						</li>
-						<li>
-							<a href="./php/adminSubmitReq.php" class="block py-2 pr-4 pl-3 text-white rounded md:hover:bg-gray-50 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">Admin Submit</a>
-						</li><?php } ?>
+						<?php if (@$_SESSION['role'] == 'admin') { ?>
+							<li>
+								<a href="./php/upload.php" class="block py-2 pr-4 pl-3 text-white rounded md:hover:bg-gray-50 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">Upload Image</a>
+							</li>
+							<li>
+								<a href="./php/adminSubmitReq.php" class="block py-2 pr-4 pl-3 text-white rounded md:hover:bg-gray-50 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">Admin Submit</a>
+							</li><?php } ?>
 					</ul>
 				</div>
 			</div>
@@ -273,7 +277,7 @@
 							<span class="block sm:inline"><?php echo @$_SESSION["regisSucc"]; ?></span>
 							<span class="absolute top-0 bottom-0 right-0 px-4 py-3"></span>
 						</div>
-					<?php 
+					<?php
 					} ?>
 					<form class="space-y-4 md:space-y-6" action="./php/checkLogin.php" method="POST">
 						<label for="user-icon" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Your username</label>
@@ -351,7 +355,10 @@
 					} ?>
 					<form class="space-y-4 md:space-y-6" action="./php/add_account.php" method="POST">
 						<label for="user-icon" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Your username</label>
-						<span class="text-red-600"><?php if(isset($_SESSION['usrErrRegis'])){ echo @$_SESSION['usrErrRegis'];unset($_SESSION['usrErrRegis']);} ?></span>
+						<span class="text-red-600"><?php if (isset($_SESSION['usrErrRegis'])) {
+														echo @$_SESSION['usrErrRegis'];
+														unset($_SESSION['usrErrRegis']);
+													} ?></span>
 						<div class="relative">
 							<div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
 								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-500 dark:text-gray-400">
@@ -363,7 +370,10 @@
 						</div>
 
 						<label for="key-icon" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Password</label>
-						<span class="text-red-600"><?php  if(isset($_SESSION['pwErrRegis'])){echo $_SESSION['pwErrRegis'];unset($_SESSION['pwErrRegis']);} ?></span>
+						<span class="text-red-600"><?php if (isset($_SESSION['pwErrRegis'])) {
+														echo $_SESSION['pwErrRegis'];
+														unset($_SESSION['pwErrRegis']);
+													} ?></span>
 						<div class="relative">
 							<div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
 								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-500 dark:text-gray-400">
@@ -373,7 +383,10 @@
 							<input type="password" name="password" id="key-icon" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="••••••••" required="">
 						</div>
 						<label for="mail-icon" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Email</label>
-						<span class="text-red-600"><?php if(isset($_SESSION['emailErrRegis'])){echo @$_SESSION['emailErrRegis'];unset($_SESSION['emailErrRegis']);} ?></span>
+						<span class="text-red-600"><?php if (isset($_SESSION['emailErrRegis'])) {
+														echo @$_SESSION['emailErrRegis'];
+														unset($_SESSION['emailErrRegis']);
+													} ?></span>
 						<div class="relative">
 							<div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
 								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-500 dark:text-gray-400">
@@ -408,19 +421,25 @@
 								document.getElementById('regis_btn').click();
 							})</script>";
 							unset($_SESSION['regisFail']);
-						}elseif(isset($_SESSION['loginFirst'])){
+						} elseif (isset($_SESSION['loginFirst'])) {
 							// login first
+
+							// echo "<script>
+							// Swal.fire({
+							// 	icon: 'warning',
+							// 	title: 'Please Login',
+							// 	text: 'Please login and try again',
+							// }).then((result) => {
+							// 	document.getElementById('sign_btn').click();
+							// })</script>";
+							// unset($_SESSION['loginFirst']);
 							echo "<script>
-							Swal.fire({
-								icon: 'warning',
-								title: 'Please Login',
-								text: 'Please login and try again',
-							}).then((result) => {
-								document.getElementById('sign_btn').click();
-							})</script>";
-							unset($_SESSION['loginFirst']);
-						}elseif(isset($_GET['sign'])){
+								$('#sign_btn').click();
+						</script>";
+							
+						} elseif (isset($_GET['sign'])) {
 							echo "<script>
+							document.getElementById('sign_btn').click();
 							</script>"; //ต้องการให้เด้งsign in เลยโดยไม่มีให้คลิก ok ก่อน
 						}
 						?>
@@ -575,6 +594,9 @@
 
 		//document.getElementById("regis_btn").click();
 	</script>
+
+	<!-- JQuery clicked sign_btn -->
+	
 
 </body>
 
