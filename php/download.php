@@ -76,7 +76,8 @@ if (@$_SESSION["role"] != 'admin') {
         <div class="container lg:px-32 px-4 py-8 mx-auto items-center">
             <div class="grid grid-cols-4 grid-rows-4 grid-flow-col gap-2" id="card-grid">
                 <?php
-                $query = $conn->query("SELECT * FROM images where role_access='user' ORDER BY uploaded_on DESC LIMIT 8 ");
+                $name=$_GET['name'];
+                $query = $conn->query("SELECT * FROM images where file_name='$name' ORDER BY uploaded_on DESC LIMIT 8 ");
                 if ($query->num_rows > 0) {
                     while ($row = $query->fetch_assoc()) {
                         $imageURL = '../upload/' . $row["file_name"];

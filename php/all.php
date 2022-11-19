@@ -107,24 +107,104 @@
     </nav>
     <div class="container lg:px-32 px-4 py-8 mx-auto items-center">
         <div class="grid grid-cols-4 grid-rows-4 grid-flow-col gap-2 ">
-                <?php
-                $query = $conn->query("SELECT * FROM images where role_access='user' ORDER BY uploaded_on");
-                if ($query->num_rows > 0) {
-                    while ($row = $query->fetch_assoc()) {
-                        $imageURL = '../upload/' . $row["file_name"];
-                        $name = $row["file_name"];
-                        $dis = $row["dis"];
+		<?php $accessLevel = @$_SESSION['role']; if ($accessLevel == "user") {
+            $query = $conn->query("SELECT * FROM images where role_access = 'user'");
+            if ($query->num_rows > 0) {
+                while ($row = $query->fetch_assoc()) {
+                    $imageURL = '../upload/' . $row["file_name"];
+                    $id = $row["id"];
+                    $dis = $row["dis"];
+                    
+                
                 ?>
-                        <div class="img-wrap">
+					 <div class="img-wrap">
                             <span class="material-symbols-outlined">download</span>
                             <img src=<?php echo $imageURL ?> class="<?php echo $name ?> inset-0 h-full w-full shadow-lg object-cover object-center rounded imgHover hover:scale-115 duration-300" id="img" />
                             <figcaption class="absolute bottom-6 px-4 text-lg text-white border-b-gray-400">
 					            <p><?php echo $dis ?></p>
 					        </figcatpion>
                         </div>
-                    <?php
-                    }
-                }  ?>
+				<?php
+					}
+                }
+        } elseif ($accessLevel == "premium") {
+            $query = $conn->query("SELECT * FROM images where role_access = 'premium' OR role_access = 'user' ");
+            if ($query->num_rows > 0) {
+                while ($row = $query->fetch_assoc()) {
+                    $imageURL = '../upload/' . $row["file_name"];
+                    $id = $row["id"];
+					$dis = $row["dis"];
+                
+                ?>
+                <div class="img-wrap">
+                            <span class="material-symbols-outlined">download</span>
+                            <img src=<?php echo $imageURL ?> class="<?php echo $name ?> inset-0 h-full w-full shadow-lg object-cover object-center rounded imgHover hover:scale-115 duration-300" id="img" />
+                            <figcaption class="absolute bottom-6 px-4 text-lg text-white border-b-gray-400">
+					            <p><?php echo $dis ?></p>
+					        </figcatpion>
+                        </div>
+            <?php
+                }
+            }
+        }else if ($accessLevel == "premium_p") {
+            $query = $conn->query("SELECT * FROM images where role_access = 'premium' OR role_access = 'user' ");
+            if ($query->num_rows > 0) {
+                while ($row = $query->fetch_assoc()) {
+                    $imageURL = '../upload/' . $row["file_name"];
+                    $id = $row["id"];
+					$dis = $row["dis"];
+                
+                ?>
+                <div class="img-wrap">
+                            <span class="material-symbols-outlined">download</span>
+                            <img src=<?php echo $imageURL ?> class="<?php echo $name ?> inset-0 h-full w-full shadow-lg object-cover object-center rounded imgHover hover:scale-115 duration-300" id="img" />
+                            <figcaption class="absolute bottom-6 px-4 text-lg text-white border-b-gray-400">
+					            <p><?php echo $dis ?></p>
+					        </figcatpion>
+                        </div>
+            <?php
+                }
+            }
+        }elseif ($accessLevel == "commercial") {
+            $query = $conn->query("SELECT * FROM images where role_access = 'premium' OR role_access = 'user' ");
+            if ($query->num_rows > 0) {
+                while ($row = $query->fetch_assoc()) {
+                    $imageURL = '../upload/' . $row["file_name"];
+                    $id = $row["id"];
+					$dis = $row["dis"];
+                
+                ?>
+                <div class="img-wrap">
+                            <span class="material-symbols-outlined">download</span>
+                            <img src=<?php echo $imageURL ?> class="<?php echo $name ?> inset-0 h-full w-full shadow-lg object-cover object-center rounded imgHover hover:scale-115 duration-300" id="img" />
+                            <figcaption class="absolute bottom-6 px-4 text-lg text-white border-b-gray-400">
+					            <p><?php echo $dis ?></p>
+					        </figcatpion>
+                        </div>
+            <?php
+                }
+            }
+        }
+        else {
+            $query = $conn->query("SELECT * FROM images ");
+            if ($query->num_rows > 0) {
+                while ($row = $query->fetch_assoc()) {
+                    $imageURL = '../upload/' . $row["file_name"];
+                    $id = $row["id"];
+					$dis = $row["dis"];
+                
+                ?>
+                <div class="img-wrap">
+                            <span class="material-symbols-outlined">download</span>
+                            <a href="./download.php?name=<?php echo $row["file_name"] ?>"><img src=<?php echo $imageURL ?> id="img" class="<?php echo $row["file_name"] ?>"/></a>
+                            <figcaption class="absolute bottom-6 px-4 text-lg text-white border-b-gray-400">
+					            <p><?php echo $dis ?></p>
+					        </figcatpion>
+                        </div>
+            <?php
+                }
+            }
+        } ?>
             </div>
 		</div>
         <div id="sign-in-popup" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
@@ -366,4 +446,15 @@
 			document.getElementsByTagName('html')[0].style.overflow = 'scroll';
 		});
 	</script>
+
+<script>
+        // $(document).ready(function() {
+        //     $('#img').click(function() {
+        //         var el = this;
+        //         var name = $(this).next().attr('class');
+		// 		window.location.href = "download.php?name=" + name;
+		// 	});
+            
+		// });
+    </script>
 </body>
