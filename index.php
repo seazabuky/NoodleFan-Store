@@ -170,22 +170,22 @@
 	<div class="swiper headerSwiper">
 		<div class="swiper-wrapper">
 			<div class="swiper-slide">
-			<?php $img1 = "_SAL9154.JPG" ?>
-			<a href="./php/download.php?name=<?php echo $img1; ?>"><img src="upload/<?php echo $img1; ?>" alt="avatar" /></a>
+				<?php $img1 = "_SAL9154.JPG" ?>
+				<a href="./php/download.php?name=<?php echo $img1; ?>"><img src="upload/<?php echo $img1; ?>" alt="avatar" /></a>
 				<figcaption class="absolute bottom-6 px-4 text-lg text-white border-b-gray-400">
 					<p>SONY A7III + 24-70mm f/2.8 GM</p>
 					</figcatpion>
 			</div>
 			<div class="swiper-slide">
-			<?php $img2 = "LUA_9514.JPG" ?>
-			<a href="./php/download.php?name=<?php echo $img2; ?>"><img src="upload/<?php echo $img2; ?>" alt="mavic 3 pro" /></a>
+				<?php $img2 = "LUA_9514.JPG" ?>
+				<a href="./php/download.php?name=<?php echo $img2; ?>"><img src="upload/<?php echo $img2; ?>" alt="mavic 3 pro" /></a>
 				<figcaption class="absolute bottom-6 px-4 text-lg text-white border-b-gray-400">
 					<p>NIKON D5600 + 85mm f/1.8</p>
 					</figcatpion>
 			</div>
 			<div class="swiper-slide">
-			<?php $img3 = "_SAL7726.JPG" ?>
-			<a href="./php/download.php?name=<?php echo $img3; ?>"><img src="upload/<?php echo $img3; ?>" alt="t40" /></a>
+				<?php $img3 = "_SAL7726.JPG" ?>
+				<a href="./php/download.php?name=<?php echo $img3; ?>"><img src="upload/<?php echo $img3; ?>" alt="t40" /></a>
 				<figcaption class="absolute bottom-6 px-4 text-lg text-white border-b-gray-400">
 					<p>SONY A7III + 24-70mm f/2.8 GM</p>
 					</figcatpion>
@@ -221,7 +221,7 @@
 						$name = $row["file_name"];
 				?>
 						<div class="w-full row-span-2" id="warp">
-						<a href="./php/download.php?name=<?php echo $name; ?>"><img src=<?php echo $imageURL ?> class="inset-0 h-full w-full shadow-lg object-cover object-center rounded imgHover hover:scale-115 duration-300" id="img" /></a>
+							<a href="./php/download.php?name=<?php echo $name; ?>"><img src=<?php echo $imageURL ?> class="inset-0 h-full w-full shadow-lg object-cover object-center rounded imgHover hover:scale-115 duration-300" id="img" /></a>
 						</div>
 				<?php
 					}
@@ -428,19 +428,15 @@
 						} elseif (isset($_SESSION['loginFirst'])) {
 							// login first
 
-							// echo "<script>
-							// Swal.fire({
-							// 	icon: 'warning',
-							// 	title: 'Please Login',
-							// 	text: 'Please login and try again',
-							// }).then((result) => {
-							// 	document.getElementById('sign_btn').click();
-							// })</script>";
-							// unset($_SESSION['loginFirst']);
 							echo "<script>
-								$('#sign_btn').click();
-						</script>";
-							
+							Swal.fire({
+								icon: 'warning',
+								title: 'Please Login',
+								text: 'Please login and try again',
+							}).then((result) => {
+								document.getElementById('sign_btn').click();
+							})</script>";
+							unset($_SESSION['loginFirst']);
 						} elseif (isset($_GET['sign'])) {
 							echo "<script>
 							document.getElementById('sign_btn').click();
@@ -600,7 +596,7 @@
 	</script>
 
 	<!-- JQuery clicked sign_btn -->
-	
+
 
 </body>
 

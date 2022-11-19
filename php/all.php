@@ -22,9 +22,42 @@
 	<script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- sweetalert2 -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+	<link rel="stylesheet" href="./CSS/App.css">
+
 	<style>
 		#card-grid:hover>#warp:not(:hover) #img {
 			filter: brightness(0.5) saturate(0.5) contrast(1) blur(2px);
+		}
+
+		.gradient-text {
+			background: linear-gradient(-45deg, #D16BA5, #86A8E7, #5FFBF1);
+			background-size: 300%;
+			font-family: Arial, Helvetica, sans-serif;
+			font-weight: 900;
+			font-size: 100px;
+			letter-spacing: -5px;
+			text-transform: uppercase;
+			background-clip: text;
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+			animation: animated_text 5s ease-in-out infinite;
+			-moz-animation: animated_text 5s ease-in-out infinite;
+			-webkit-animation: animated_text 5s ease-in-out infinite;
+		}
+
+		@keyframes animated_text {
+			0% {
+				background-position: 0px 50%;
+			}
+
+			50% {
+				background-position: 100% 50%;
+			}
+
+			100% {
+				background-position: 0px 50%;
+			}
 		}
 
 		.img-wrap {
@@ -57,10 +90,10 @@
 </head>
 
 <body>
-<?php
-    include("server.php");
-    $btn_login = '<a href="../index.php?sign=sign">Sign in</a>';
-    $btn_icon = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="inline-block ml-1 w-4 h-4 text-white xl:inline"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+	<?php
+	include("server.php");
+	$btn_login = '<a href="../index.php?sign=sign">Sign in</a>';
+	$btn_icon = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="inline-block ml-1 w-4 h-4 text-white xl:inline"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
 	</svg>
 	';
 	$id_btn = 'btn_login';
@@ -129,12 +162,13 @@
 								$id = $row["id"];
 								$dis = $row["dis"];
 					?>
-								<div class="img-wrap">
-									<span class="material-symbols-outlined">download</span>
-									<img src=<?php echo $imageURL ?> class="<?php echo $name ?> inset-0 h-full w-full shadow-lg object-cover object-center rounded imgHover hover:scale-115 duration-300" id="img" />
-									<figcaption class="absolute bottom-6 px-4 text-lg text-white border-b-gray-400">
-										<p><?php echo $dis ?></p>
-										</figcatpion>
+								<div class="w-full row-2" id="warp">
+									<figure class="relative max-w-sm transition-all w-full duration-300 cursor-pointer ">
+										<a href="./download.php?name=<?php echo $row["file_name"] ?>"><img src=<?php echo $imageURL ?> class="inset-0 h-full w-full shadow-lg object-cover object-center rounded imgHover hover:scale-115 duration-300" id="img" /></a>
+										<figcaption class="absolute bottom-6 px-4 text-lg text-white">
+											<p>Do you want to get notified when a new component is added to Flowbite?</p>
+											</figcatpion>
+									</figure>
 								</div>
 							<?php
 							}
@@ -148,9 +182,8 @@
 								$dis = $row["dis"];
 
 							?>
-								<div class="img-wrap">
-									<span class="material-symbols-outlined">download</span>
-									<img src=<?php echo $imageURL ?> class="<?php echo $name ?> inset-0 h-full w-full shadow-lg object-cover object-center rounded imgHover hover:scale-115 duration-300" id="img" />
+								<div class="w-full row-2" id="warp">
+									<a href="./download.php?name=<?php echo $row["file_name"] ?>"><img src=<?php echo $imageURL ?> class="inset-0 h-full w-full shadow-lg object-cover object-center rounded imgHover hover:scale-115 duration-300" id="img" /></a>
 									<figcaption class="absolute bottom-6 px-4 text-lg text-white border-b-gray-400">
 										<p><?php echo $dis ?></p>
 										</figcatpion>
@@ -167,9 +200,8 @@
 								$dis = $row["dis"];
 
 							?>
-								<div class="img-wrap">
-									<span class="material-symbols-outlined">download</span>
-									<img src=<?php echo $imageURL ?> class="<?php echo $name ?> inset-0 h-full w-full shadow-lg object-cover object-center rounded imgHover hover:scale-115 duration-300" id="img" />
+								<div class="w-full row-2" id="warp">
+									<a href="./download.php?name=<?php echo $row["file_name"] ?>"><img src=<?php echo $imageURL ?> class="inset-0 h-full w-full shadow-lg object-cover object-center rounded imgHover hover:scale-115 duration-300" id="img" /></a>
 									<figcaption class="absolute bottom-6 px-4 text-lg text-white border-b-gray-400">
 										<p><?php echo $dis ?></p>
 										</figcatpion>
@@ -186,9 +218,8 @@
 								$dis = $row["dis"];
 
 							?>
-								<div class="img-wrap">
-									<span class="material-symbols-outlined">download</span>
-									<img src=<?php echo $imageURL ?> class="<?php echo $name ?> inset-0 h-full w-full shadow-lg object-cover object-center rounded imgHover hover:scale-115 duration-300" id="img" />
+								<div class="w-full row-2" id="warp">
+									<a href="./download.php?name=<?php echo $row["file_name"] ?>"><img src=<?php echo $imageURL ?> class="inset-0 h-full w-full shadow-lg object-cover object-center rounded imgHover hover:scale-115 duration-300" id="img" /></a>
 									<figcaption class="absolute bottom-6 px-4 text-lg text-white border-b-gray-400">
 										<p><?php echo $dis ?></p>
 										</figcatpion>
@@ -205,9 +236,8 @@
 								$dis = $row["dis"];
 
 							?>
-								<div class="img-wrap">
-									<span class="material-symbols-outlined">download</span>
-									<a href="./download.php?name=<?php echo $row["file_name"] ?>"><img src=<?php echo $imageURL ?> id="img" class="<?php echo $row["file_name"] ?>" /></a>
+								<div class="w-full row-2" id="warp">
+									<a href="./download.php?name=<?php echo $row["file_name"] ?>"><img src=<?php echo $imageURL ?> class="inset-0 h-full w-full shadow-lg object-cover object-center rounded imgHover hover:scale-115 duration-300" id="img" /></a>
 									<figcaption class="absolute bottom-6 px-4 text-lg text-white border-b-gray-400">
 										<p><?php echo $dis ?></p>
 										</figcatpion>
@@ -222,7 +252,7 @@
 	</section>
 
 
-        <footer class="p-4 bg-gray-700 rounded-lg shadow md:px-6 md:py-8 dark:bg-gray-900">
+	<footer class="p-4 bg-gray-700 shadow md:px-6 md:py-8 dark:bg-gray-900">
 		<div class="sm:flex sm:items-center sm:justify-between">
 			<a href="index.php" class="flex items-center mb-4 sm:mb-0">
 				<img src="https://cdn-icons-png.flaticon.com/512/1471/1471262.png" class="mr-3 h-8" alt="Flowbite Logo" />
@@ -298,14 +328,4 @@
 		});
 	</script>
 
-	<script>
-		// $(document).ready(function() {
-		//     $('#img').click(function() {
-		//         var el = this;
-		//         var name = $(this).next().attr('class');
-		// 		window.location.href = "download.php?name=" + name;
-		// 	});
-
-		// });
-	</script>
 </body>
