@@ -89,22 +89,22 @@
 					</button>
 				</div>
 				<div class="hidden justify-between items-center w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
-					<ul class="flex flex-col p-4 mt-4 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:bg-blue-100 lg:bg-transparent">
+                <ul class="flex flex-col p-4 mt-4 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:bg-blue-100 lg:bg-transparent">
 						<li>
-							<a href="./php/all.php" class="block py-2 pr-4 pl-3 text-white rounded md:hover:bg-blue-500 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">All</a>
+							<a href="all.php" class="block py-2 pr-4 pl-3 text-white rounded md:hover:bg-blue-500 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">All</a>
 						</li>
 						<li>
-							<a href="pricetable.php" class="block py-2 pr-4 pl-3 text-white rounded md:hover:bg-blue-500 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">Product</a>
+							<a href="../pricetable.php" class="block py-2 pr-4 pl-3 text-white rounded md:hover:bg-blue-500 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">Package</a>
 						</li>
-							<li>
-								<a href="orderCheck.php" class="block py-2 pr-4 pl-3 text-white rounded md:hover:bg-gray-50 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">Order</a>
-							</li>
+						<li>
+                            <a href="orderCheck.php" class="block py-2 pr-4 pl-3 text-white rounded md:hover:bg-gray-50 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">Order</a>
+						</li>
+                        <?php if(@$_SESSION['role']=='admin'){ ?>
 						<li>
 							<a href="upload.php" class="block py-2 pr-4 pl-3 text-white rounded md:hover:bg-gray-50 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">Upload Image</a>
 						</li>
-						<?php if(@$_SESSION['role']=='admin'){ ?>
 						<li>
-							<a href="adminSubmitReq.php" class="block py-2 pr-4 pl-3 text-white rounded md:hover:bg-gray-50 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">Admin Submit</a>
+                        <a href="adminSubmitReq.php" class="block py-2 pr-4 pl-3 text-white rounded md:hover:bg-gray-50 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">Admin Submit</a>
 						</li><?php } ?>
 					</ul>
 				</div>
@@ -125,12 +125,22 @@
                             <label class="block mb-3 text-sm font-bold text-gray-700" for="image">
                                 What you want package
                             </label>
-                            <!-- select by use tailwindcss option first disable "select role" "user" "admin" -->
+                            
                             <select class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border border-black-500 rounded shadow appearance-none focus:outline-none focus:shadow-outline" name="role_req" id="role_access" onchange="topUp()">
+                                <option selected="true" disabled="disabled">Select package</option>
+                                <?php if($_SESSION['role']=='commercial'){?>
+                                    <option selected="true" disabled="disabled">You already commercial</option>
+                                <?php }elseif($_SESSION['role']=='premium_p'){?>
+                                    <option value="commercial">Commercial</option>
+                                <?php }elseif($_SESSION['role']=='premium'){?>
+                                    <option value="premium_p">Premium Plus</option>
+                                    <option value="commercial">Commercial</option>
+                                <?php }else{?>
                                 <option selected="true" disabled="disabled">Select package</option>
                                 <option value="premium">Premium</option>
                                 <option value="premium_p">Premium Plus</option>
                                 <option value="commercial">Commercial</option>
+                                <?php }?>
                             </select>
                         </div>
                         <div class="mb-4">

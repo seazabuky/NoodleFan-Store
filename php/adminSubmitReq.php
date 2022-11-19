@@ -85,7 +85,10 @@
                 <div class="hidden justify-between items-center w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
                     <ul class="flex flex-col p-4 mt-4 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:bg-blue-100 lg:bg-transparent">
                         <li>
-                            <a href="../pricetable.php" class="block py-2 pr-4 pl-3 text-white rounded md:hover:bg-blue-500 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">Product</a>
+							<a href="./all.php" class="block py-2 pr-4 pl-3 text-white rounded md:hover:bg-blue-500 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">All</a>
+						</li>
+                        <li>
+                            <a href="../pricetable.php" class="block py-2 pr-4 pl-3 text-white rounded md:hover:bg-blue-500 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">Package</a>
                         </li>
                         <li>
                             <a href="orderCheck.php" class="block py-2 pr-4 pl-3 text-white rounded md:hover:bg-gray-50 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">Order</a>
@@ -109,15 +112,15 @@
             </div>
             <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
                 <?php
-                $sql = "SELECT * FROM request WHERE status=0";
+                $sql = "SELECT * FROM request WHERE status = 0";
                 $result = $conn->query($sql);
                 if ($result->num_rows > 0) {
                     echo '<table id="sortme" class="w-full text-sm text-left"><thead class="text-xs uppercase bg-gray-50 dark:bg-gray-700 dark:text-white"><tr><th data-type="number">ID <i style="font-size:10px" class="fa">&#xf0dc;</i></th><th>Username <i style="font-size:10px" class="fa">&#xf0dc;</i></th><th>Role Request <i style="font-size:10px" class="fa">&#xf0dc;</i></th><th>Current Role <i style="font-size:10px" class="fa">&#xf0dc;</i></th><th>Status <i style="font-size:10px" class="fa">&#xf0dc;</i></th><th>Receipt <i style="font-size:10px" class="fa">&#xf0dc;</i></th><th colspan="2">approve and remove</td></tr></thead>';
                     while ($row = $result->fetch_assoc()) {
                         $imageURL = '../receipt/' . $row["file_name"];
                         $filename = $row["file_name"];
-                        echo "<tbody><tr><td>" . $row["id"] . "</td><td>" . $row["username_req"] . "</td><td>" . $row["role_req"] . "</td><td>" . $row["current_role"] . "</td><td>" . $row["status"] . "</td><td><img src=" . $imageURL . " alt='' width='20%'>" . '</td><td class="approve"><span class="material-icons">done</span></td><td class="delete"><span class="material-icons">
-                close
+                        echo "<tbody><tr><td>" . $row["id"] . "</td><td>" . $row["username_req"] . "</td><td>" . $row["role_req"] . "</td><td>" . $row["current_role"] . "</td><td>" . $row["status"] . "</td><td><img src=" . $imageURL . " alt='' width='20%'>" . '</td><td class="approve"><span class="material-icons">approve</span></td><td class="delete"><span class="material-icons">
+                remove
                 </span></td></tr></tbody>';
                     }
                     echo "</table>";
@@ -144,7 +147,7 @@
                     username: username,
                     role_req: role_req,
                     approved_by: approved_by,
-                    filename: $filename
+                    filename: filename
                 };
                 $.ajax({
                     url: 'updateRoleUser.php',
