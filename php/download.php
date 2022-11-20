@@ -1,5 +1,4 @@
 
-?>
 <html lang="en">
 
 <head>
@@ -35,6 +34,21 @@
 	';
     $id_btn = 'btn_login';
     include('server.php');
+    function checkRole(){
+		if(isset($_SESSION['role'])){
+			if($_SESSION['role'] == "admin"){
+				echo $_SESSION['username'].'<span class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-md text-sm px-2 py-1 text-center ml-2 mr-2 mb-2">'.$_SESSION['role'].'</span>' ;
+			}elseif($_SESSION['role'] == "user"){
+				echo $_SESSION['username'].'<span class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-md text-sm px-2 py-1 text-center ml-2 mr-2 mb-2">'.$_SESSION['role'].'</span>' ;
+			}elseif($_SESSION['role'] == "premium"){
+				echo $_SESSION['username'].'<span class="text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-md text-sm px-2 py-1 text-center ml-2 mr-2 mb-2">'.$_SESSION['role'].'</span>' ;
+			}elseif($_SESSION['role'] == "premium_p"){
+				echo $_SESSION['username'].'<span class="text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-md text-sm px-2 py-1 text-center ml-2 mr-2 mb-2">premium plus</span>' ;
+			}elseif($_SESSION['role'] == "commercial"){
+				echo $_SESSION['username'].'<span class="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-md text-sm px-2 py-1 text-center ml-2 mr-2 mb-2">'.$_SESSION['role'].'</span>' ;
+			}
+		}
+	}
     if (isset($_SESSION['role'])) {
         $btn_login = '<a href="logout.php">Sign out</a>';
         $id_btn = 'btn_logout';
@@ -46,13 +60,18 @@
     ?>
 
     <!-- navbar float-->
-    <nav class=" bg-gray-700 px-2 sm:px-4 py-2.5 dark:bg-transparent fixed w-full z-20 top-0 left-0  ">
+    <nav class="relative bg-gray-700 px-2 sm:px-4 py-2.5 dark:bg-transparent fixed w-full z-20 top-0 left-0  ">
         <div class="container flex flex-wrap justify-between items-center mx-auto">
             <a href="../index.php" class="flex items-center">
                 <img src="https://cdn-icons-png.flaticon.com/512/1471/1471262.png" class="mr-3 h-6 sm:h-9" alt="NoodleFans Logo">
                 <span class="self-center text-xl font-semibold whitespace-nowrap text-white">NoodleFan Store</span>
             </a>
             <div class="flex md:order-2">
+                <div class="flex items-center p-2 text-base font-normal text-white">
+               		<svg aria-hidden="true" class="flex-shrink-0 w-6 h-6 text-gray-200 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
+               		<span class="flex-1 ml-3 whitespace-nowrap"> 
+					<?php checkRole(); ?> </span>
+				</div>
                 <button type="button" id="<?php echo @$id_btn ?>" class="text-white inline-block bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"><?php echo @$btn_login, @$btn_icon ?></button>
                 <!-- open menu -->
                 <button data-collapse-toggle="navbar-sticky" type="button" class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-sticky" aria-expanded="false">
@@ -65,7 +84,7 @@
             <div class="hidden justify-between items-center w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
                 <ul class="flex flex-col p-4 mt-4 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:bg-blue-100 lg:bg-transparent">
                     <li>
-                        <a href="all.php" class="block py-2 pr-4 pl-3 text-white rounded md:hover:bg-blue-500 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">All</a>
+                        <a href="all.php" class="block py-2 pr-4 pl-3 text-white rounded md:hover:bg-blue-500 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">Gallery</a>
                     </li>
                     <li>
                         <a href="../pricetable.php" class="block py-2 pr-4 pl-3 text-white rounded md:hover:bg-blue-500 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">Product</a>
@@ -84,7 +103,6 @@
         </div>
     </nav>
     <section class="overflow-hidden text-gray-700 mb-60 pt-10">
-        <div class="container lg:px-32 px-4 py-8 mx-auto items-center">
             <?php $name = $_GET['name'];
     $query = $conn->query("SELECT * FROM images where file_name='$name' ");
     if ($query->num_rows > 0) {
@@ -94,22 +112,25 @@
                     $_SESSION['loginFirst'] = 'Please login first';
                     header('location: ../index.php');
                     break;
-                }else if($role_access=='premium'&&@$_SESSION['role']!='premium_p'&&@$_SESSION['role']!='commercial'&&@$_SESSION['role']!='premium'){
+                }else if($role_access=='premium'&&@$_SESSION['role']=='user'){
+                    echo '<div class="container lg:px-32 px-4 py-8 mx-auto items-center">';
                     echo '<div class="space-y-8 lg:grid lg:grid-cols-3 sm:gap-6 xl:gap-10 lg:space-y-0"><h1 class="mt-4 mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Please upgrade your package to <u>'.$role_access.'</u></h1>';
                     echo '<a href="../pricetable.php" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Upgrade package</a>';
                     echo '<a href="../index.php" class="w-full text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 mr-2 mb-2">Back</a></div>';
                     break;
-                }else if($role_access=='premium_p'&&@$_SESSION['role']!='commercial'&&@$_SESSION['role']!='premium_p'){
+                }else if($role_access=='premium_p'&&(@$_SESSION['role']=='premium'||@$_SESSION['role']=='user')){
+                    echo '<div class="container lg:px-32 px-4 py-8 mx-auto items-center">';
                     echo '<div class="space-y-8 lg:grid lg:grid-cols-3 sm:gap-6 xl:gap-10 lg:space-y-0"><h1 class="mt-4 mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Please upgrade your package to <u>'.$role_access.'</u></h1>';
                     echo '<a href="../pricetable.php" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Upgrade package</a>';
                     echo '<a href="../index.php" class="w-full text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 mr-2 mb-2">Back</a></div>';
                     break;
                 }elseif($role_access=='commercial'&&@$_SESSION['role']!='admin'&&@$_SESSION['role']!='commercial'){
+                    echo '<div class="container lg:px-32 px-4 py-8 mx-auto items-center">';
                     echo '<div class="space-y-8 lg:grid lg:grid-cols-3 sm:gap-6 xl:gap-10 lg:space-y-0"><h1 class="mt-4 mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Please upgrade your package to <u>'.$role_access.'</u></h1>';
                     echo '<a href="../pricetable.php" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Upgrade package</a>';
                     echo '<a href="../index.php" class="w-full text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 mr-2 mb-2">Back</a></div>';
-                }else{ ?>
-            <div class="grid grid-cols-4 grid-rows-4 grid-flow-col gap-2" id="card-grid">
+                }else{ echo '<div class="container grid grid-cols-2 lg:px-32 px-4 py-8 mx-auto items-center">';?>
+            <div id="card-grid">
                 <?php
                 $name = $_GET['name'];
                 $query = $conn->query("SELECT * FROM images where file_name='$name' ORDER BY uploaded_on DESC LIMIT 8 ");
@@ -118,17 +139,16 @@
                         $imageURL = '../upload/' . $row["file_name"];
                         $name = $row["file_name"];
                 ?>
-                        <div class="w-full row-span-2 pt-10" id="warp">
-                            <img class="<?php echo $name ?> max-w-xl h-auto rounded-lg shadow-xl dark:shadow-gray-800" src="<?php echo $imageURL; ?>" alt="" width="100%">
-                            <figcaption class="mt-2 text-sm text-center">
-                                <!-- button download image -->
-                                <a href="<?php echo $imageURL; ?>" download="<?php echo $imageURL; ?>" class="text-white inline-block bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Download</a>
-                            </figcaption>
+                        <div class=class="" id="warp">
+                            <img class="relative rounded-lg shadow-xl basis-1/7 object-cover max-w-full w-96 h-auto dark:shadow-gray-800" src="<?php echo $imageURL; ?>" alt="">
                         </div>
                 <?php
                     }
                 } ?>
             </div>
+            <div class="">
+                            <a href="<?php echo $imageURL; ?>" download="<?php echo $imageURL; ?>" class=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xl sm:text-sm text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" style="padding-left:20%;padding-right:20%;padding-top:5%;padding-bottom:5%;">Download</a>
+                            </div>
             <?php } } } 
              ?>
         </div>

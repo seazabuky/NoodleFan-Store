@@ -9,7 +9,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/1471/1471262.png" />
-
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <!-- Tailwind And Flowbite -->
     <link href="https://unpkg.com/tailwindcss/dist/tailwind.min.css" rel="stylesheet">
 
@@ -49,6 +49,21 @@
 <body>
     <?php
     include("server.php");
+    function checkRole(){
+		if(isset($_SESSION['role'])){
+			if($_SESSION['role'] == "admin"){
+				echo $_SESSION['username'].'<span class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-md text-sm px-2 py-1 text-center ml-2 mr-2 mb-2">'.$_SESSION['role'].'</span>' ;
+			}elseif($_SESSION['role'] == "user"){
+				echo $_SESSION['username'].'<span class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-md text-sm px-2 py-1 text-center ml-2 mr-2 mb-2">'.$_SESSION['role'].'</span>' ;
+			}elseif($_SESSION['role'] == "premium"){
+				echo $_SESSION['username'].'<span class="text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-md text-sm px-2 py-1 text-center ml-2 mr-2 mb-2">'.$_SESSION['role'].'</span>' ;
+			}elseif($_SESSION['role'] == "premium_p"){
+				echo $_SESSION['username'].'<span class="text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-md text-sm px-2 py-1 text-center ml-2 mr-2 mb-2">'.$_SESSION['role'].'</span>' ;
+			}elseif($_SESSION['role'] == "commercial"){
+				echo $_SESSION['username'].'<span class="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-md text-sm px-2 py-1 text-center ml-2 mr-2 mb-2">'.$_SESSION['role'].'</span>' ;
+			}
+		}
+	}
     if (@$_SESSION['role'] != 'admin') {
         header("Location:./foo.php");
     }
@@ -71,7 +86,11 @@
                 </a>
                 <div class="flex md:order-2">
                     <!-- sign in and sign out btn -->
-
+                    <div class="flex items-center p-2 text-base font-normal text-white">
+               		    <svg aria-hidden="true" class="flex-shrink-0 w-6 h-6 text-gray-200 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
+               		    <span class="flex-1 ml-3 whitespace-nowrap"> 
+					    <?php checkRole(); ?> </span>
+				    </div>
                     <button type="button" id="<?php echo @$id_btn ?>" class="text-white inline-block bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"><?php echo @$btn_login, @$btn_icon ?></button>
 
                     <!-- open menu -->
@@ -85,7 +104,7 @@
                 <div class="hidden justify-between items-center w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
                     <ul class="flex flex-col p-4 mt-4 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:bg-blue-100 lg:bg-transparent">
                         <li>
-							<a href="./all.php" class="block py-2 pr-4 pl-3 text-white rounded md:hover:bg-blue-500 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">All</a>
+							<a href="./all.php" class="block py-2 pr-4 pl-3 text-white rounded md:hover:bg-blue-500 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">Gallery</a>
 						</li>
                         <li>
                             <a href="../pricetable.php" class="block py-2 pr-4 pl-3 text-white rounded md:hover:bg-blue-500 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">Package</a>
@@ -119,8 +138,8 @@
                     while ($row = $result->fetch_assoc()) {
                         $imageURL = '../receipt/' . $row["file_name"];
                         $filename = $row["file_name"];
-                        echo "<tbody><tr><td>" . $row["id"] . "</td><td>" . $row["username_req"] . "</td><td>" . $row["role_req"] . "</td><td>" . $row["current_role"] . "</td><td>" . $row["status"] . "</td><td><img src=" . $imageURL . " alt='' width='20%'>" . '</td><td class="approve"><span class="material-icons">approve</span></td><td class="delete"><span class="material-icons">
-                remove
+                        echo "<tbody><tr><td>" . $row["id"] . "</td><td>" . $row["username_req"] . "</td><td>" . $row["role_req"] . "</td><td>" . $row["current_role"] . "</td><td>" . $row["status"] . "</td><td><img src=" . $imageURL . " alt='' width='20%'>" . '</td><td class="approve"><span class="material-icons">done</span></td><td class="delete"><span class="material-icons">
+                close
                 </span></td></tr></tbody>';
                     }
                     echo "</table>";
