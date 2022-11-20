@@ -223,6 +223,15 @@ function checkRole(){
             <li>
 					<a href="./contact.php" class="mr-4 hover:underline">Contact</a>
 				</li>
+                <li>
+					<a href="" class="mr-4 hover:underline">About</a>
+				</li>
+				<li>
+					<a href="" class="mr-4 hover:underline">Privacy Policy</a>
+				</li>
+				<li>
+					<a href="" class="mr-4 hover:underline">Licensing</a>
+				</li>
             </ul>
         </div>
         <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
