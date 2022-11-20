@@ -225,7 +225,7 @@
             </div>
             <div class="flex mt-4 space-x-3 md:mt-6">
                 <a href="https://github.com/historyz29032" target="_blank" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-[#24292F] rounded-lg hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30"></ion-icon><ion-icon name="logo-github"></ion-icon>SSSSSS</a>
-                <a href="mailto:ireena51@gmail.com" target="_blank" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-gradient-to-br from-red-400 via-red-500 rounded-lg to-red-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800"><ion-icon name="mail-outline"></ion-icon>Instagram</a>
+                <a href="mailto:bubuzaha@gmail.com" target="_blank" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-gradient-to-br from-red-400 via-red-500 rounded-lg to-red-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800"><ion-icon name="mail-outline"></ion-icon>bubuzaha@gmail.com</a>
             </div>
         </div>
     </div>
