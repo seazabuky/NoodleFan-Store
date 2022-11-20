@@ -42,6 +42,14 @@
         .delete {
             cursor: pointer;
         }
+        .green{
+            color: green;
+            font-weight: bolder;
+        }
+        .yellow{
+            color: #fcc603;
+            font-weight: bolder;
+        }
     </style>
 
 </head>
@@ -108,7 +116,7 @@
                 <div class="hidden justify-between items-center w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
                 <ul class="flex flex-col p-4 mt-4 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:bg-blue-100 lg:bg-transparent">
 						<li>
-							<a href="all.php" class="block py-2 pr-4 pl-3 text-white rounded md:hover:bg-blue-500 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">All</a>
+							<a href="all.php" class="block py-2 pr-4 pl-3 text-white rounded md:hover:bg-blue-500 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">Gallery</a>
 						</li>
 						<li>
 							<a href="../pricetable.php" class="block py-2 pr-4 pl-3 text-white rounded md:hover:bg-blue-500 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white ">Package</a>
@@ -145,9 +153,9 @@
                         $imageURL = '../receipt/' . $row["file_name"];
                         $filename = $row["file_name"];
                         if ($row["status"] == 0) {
-                            $status = "<td class='font-yellow-300'>Pending</td>";
+                            $status = "<td ><span class='yellow'>Pending</span></td>";
                         } else {
-                            $status = "<td class='font-green-300'>Approved</td>";
+                            $status = "<td><span class='green'>Approved</span></td>";
                         }
                         echo "<tbody><tr><td>" . $row["id"] . "</td><td>" . $row["username_req"] . "</td><td>" . $row["role_req"] . "</td><td>" . $row["current_role"] . "</td>" . $status . '</td></tr></tbody>';
                     }

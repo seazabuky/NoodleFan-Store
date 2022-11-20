@@ -15,6 +15,7 @@
 
     <!-- lordicon -->
     <script src="https://cdn.lordicon.com/qjzruarw.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <!-- flowbite -->
     <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.3/dist/flowbite.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.13.0/firebase-app.js"></script>
@@ -34,7 +35,14 @@
             padding: 15px;
             text-align: left;
         }
-
+        #done{
+            color:green;
+            font-weight: bolder;
+        }
+        #close{
+            color:red;
+            font-weight: bolder;
+        }
         .error {
             color: red;
         }
@@ -138,8 +146,8 @@
                     while ($row = $result->fetch_assoc()) {
                         $imageURL = '../receipt/' . $row["file_name"];
                         $filename = $row["file_name"];
-                        echo "<tbody><tr><td>" . $row["id"] . "</td><td>" . $row["username_req"] . "</td><td>" . $row["role_req"] . "</td><td>" . $row["current_role"] . "</td><td>" . $row["status"] . "</td><td><img src=" . $imageURL . " alt='' width='20%'>" . '</td><td class="approve"><span class="material-icons">approve</span></td><td class="delete"><span class="material-icons">
-                remove
+                        echo "<tbody><tr><td>" . $row["id"] . "</td><td>" . $row["username_req"] . "</td><td>" . $row["role_req"] . "</td><td>" . $row["current_role"] . "</td><td>" . $row["status"] . "</td><td><img src=" . $imageURL . " alt='' width='20%'>" . '</td><td class="approve"><span id="done" class="material-icons">done</span></td><td class="delete"><span id="close" class="material-icons">
+                close
                 </span></td></tr></tbody>';
                     }
                     echo "</table>";
