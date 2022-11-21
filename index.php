@@ -511,6 +511,9 @@
 	<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 	<script>
 		var swiper = new Swiper(".headerSwiper", {
+			autoplay: {
+				delay: 5000,loop:true
+			},
 			slidesPerView: 1,
 			spaceBetween: 30,
 			effect: "fade",
